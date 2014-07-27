@@ -1,0 +1,44 @@
+0
+ENT PORTA=>AC -> PORT_TO_AC <endereço>
+
+1
+SAI AC>=PORTA -> AC_TO_PORT <endereço>
+
+2
+COP AUX=>AC -> CP_AUX_AC
+
+3
+COP AC=>AUX -> CP_AC_AUX  <endereço>
+
+4
+COP MEM=>AC -> CP_MEM_AC  <endereço>
+
+5
+COP AC=>MEM -> CP_AC_MEN
+
+6
+COP VAL=>AC -> CP_OPE_AC
+
+10
+SOM AC+AUX=>AC -> ADD_AC_AUX
+
+11
+SUB AC−AUX=>AC -> SUB_AC_AUX
+
+12
+SOM AC+VAL=>AC -> ADD_AC_OPE
+
+13
+SUB AC−VAL=>AC -> SUB_AC_OPE <endereço>
+
+20
+VAI GO <>
+
+21
+VAI SE Z=1
+
+22
+VAI SE P=1
+
+23
+PARA

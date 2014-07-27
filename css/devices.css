@@ -1,0 +1,37 @@
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0,0,0,0.3);
+    color:#00ff00;
+    z-index:2000;
+}
+.box{
+    position: fixed;
+    left:50%;
+    top:50%;
+    background-color:#000;
+    border:1px solid #444444;
+    border-radius:20px;
+}
+.bar_top{
+    padding: 5px;
+    height:20px;
+    text-align: right;
+}
+button{
+    border-radius: 5px;
+    background: #9c9c9c;
+    border:1px #0972a5 solid;
+}
+.contents{
+    height: 80%;
+}
+/* display */
+.device_display .text{
+    line-height: 120px;
+    font-size: 55px;
+}
+/* end display */

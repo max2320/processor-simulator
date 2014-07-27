@@ -1,0 +1,189 @@
+/* 
+    Document   : estilo
+    Author     : Anderson Rocha
+    
+*/
+body{
+    font-size: 12px;
+    text-align: center;
+}
+
+.container{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color:#5ea1db;
+}
+.header{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    background-color:#4c4c4c; 
+    height:10%;
+}
+.center{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:90%;
+}
+
+
+#computador{
+    width:900px;
+    height:500px;
+    position:absolute;
+    left:50%;
+    margin-left:-450px;
+    top:50%;
+    margin-top:-250px;
+    border-radius: 15px;
+}
+#memoria{
+    top:0;
+    bottom:0;
+    overflow-y:auto ;
+    width: 15%;
+    background-color: #43779c;
+    left:0;
+    float:left;
+    z-index:10;
+    border-radius: 15px;
+}
+#processador {
+    overflow: hidden;
+    width: 70%;
+    background: #43779c;
+    float: left;
+    height:100%;
+    left:15%;
+    border-radius: 15px;
+}
+#perifericos{
+    overflow: hidden;
+    width: 15%;
+    background-color: #43779c;
+    float: left;
+    top:0;
+    bottom:0;
+    right:0;
+    z-index:10;
+    border-radius: 15px;
+}
+table {
+    background-color: rgb(173, 173, 173);
+    border-radius: 5px 5px 5px 5px;
+    width:100%;
+    border-style: solid;
+    border-width: 1px;
+}
+table td[colspan]{
+    height: 15px;
+    border:none;
+    background-color: rgb(148, 148, 148);
+    border-radius: 5px 5px 0px 0px;
+    
+}
+table td{
+    border: 1px solid rgb(219, 219, 219);
+    margin: 0px;
+    padding: 0px;
+    border-radius: 5px 5px 5px 5px;
+}
+.col{
+    width: 75px;
+    height: 100%;
+    background: #FF10FF;
+    margin-left: 20px;
+    float: left;
+    margin-top: 15px;
+}
+.registrador{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    z-index:20;
+    padding:0;
+}
+.registrador_auxiliar{
+    width: 65px;
+    position: absolute;
+    z-index:20;
+}
+.nome{
+    height: 15px;
+    background-color: rgb(148, 148, 148);
+    border-width: 1px 1px medium;
+    border-style: solid solid none;
+    border-color: rgb(75, 75, 75) rgb(75, 75, 75) -moz-use-text-color;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 5px 5px 0px 0px;
+}
+.valor{
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 0px;
+    background-color: rgb(173, 173, 173);
+    border-right: 1px solid rgb(75, 75, 75);
+    border-width: medium 1px 1px;
+    border-style: none solid solid;
+    border-color: -moz-use-text-color rgb(75, 75, 75) rgb(75, 75, 75);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 0px 0px 5px 5px;
+}
+.unidade_funcional{
+    z-index:20;
+    position: absolute;
+}
+#unidade_controle{
+    background-color:#000;
+    height:25px;
+    width:320px;
+    position:fixed;
+    top:100%;
+    margin-top:-35px;
+    left:85%;
+    margin-left:-330px;
+    padding:5px;
+    z-index: 20;
+}
+.button{
+    background-color:#bebebe;
+    padding-left:5px;
+    padding-right:5px;
+    float:left;
+    margin-left:5px;
+    margin-right:5px;
+    border-style: outset;
+    border-radius:5px;
+    min-width:10px;
+    color:#000;
+}
+.button:active{
+    border-style: inset;
+}
+#clock_area{
+    float:left;
+}
+#clock{
+    float:left;
+}
+canvas{
+    z-index:5;
+    position:absolute;
+    left:0;
+    
+}
+

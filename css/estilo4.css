@@ -1,0 +1,115 @@
+/* 
+    Document   : estilo
+    Author     : Anderson Rocha
+    
+*/
+body{
+    font-size: 12px;
+    text-align: center;
+}
+#computador{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+#memoria{
+    height:auto;
+    top:0;
+    bottom:0;
+    overflow-y:auto ;
+    width: 15%;
+    background: #00ff00;
+    right:0;
+    float:left;
+    height:100%
+}
+#processador {
+    height: 450px;
+    overflow: hidden;
+    width: 70%;
+    background: #ff0000;
+    float: left;
+    height:100%;
+}
+#perifericos{
+    height: 450px;
+    overflow: hidden;
+    width: 15%;
+    background: #0000ff;
+    float: left;
+    height:100%;
+}
+table td{
+    width: 100%;
+    border: 1px solid #000;
+}
+.col{
+    width: 75px;
+    height: 100%;
+    background: #FF10FF;
+    margin-left: 20px;
+    float: left;
+    margin-top: 15px;
+}
+.registrador{
+    width: 45px;
+    margin: 10px;
+    height: 45px;
+    background-color: rgb(15, 0, 255);
+    position: absolute;
+}
+.registrador_auxiliar{
+    width: 65px;
+    margin: 10px;
+    background-color: rgb(15, 0, 255);
+    position: absolute;
+}
+.nome{
+    height: 15px;
+    background-color: rgb(0, 255, 15);
+}
+.valor{
+    font-size: 12px;
+    font-weight: bold;
+    padding-top: 0px;
+}
+.unidade_funcional{
+    position: absolute;
+}
+#unidade_controle{
+    background-color:#000;
+    height:25px;
+    width:300px;
+    position:fixed;
+    top:100%;
+    margin-top:-35px;
+    left:85%;
+    margin-left:-310px;
+    padding:5px;
+}
+.button{
+    background-color:#bebebe;
+    padding-left:5px;
+    padding-right:5px;
+    float:left;
+    margin-left:5px;
+    margin-right:5px;
+    border-style: outset;
+    border-radius:5px;
+    min-width:10px
+    color:#000;
+}
+.button:active{
+    border-style: inset;
+}
+#clock_area{
+    float:left;
+}
+#clock{
+    float:left;
+}
+
+

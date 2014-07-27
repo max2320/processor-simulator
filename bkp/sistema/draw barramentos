@@ -1,0 +1,108 @@
+$('canvas').remove();
+function barramento_position2(start,end){
+    var startobj=$('[el="'+start+'"]');
+    var endobj=$('[el="'+end+'"]');
+    
+    if($(startobj).offset().left<$(endobj).offset().left){
+        startx=Math.ceil($(startobj).offset().left);
+        endx=Math.ceil($(endobj).offset().left+$(endobj).width());
+        
+        width=(endx-startx);
+        
+        canvas_start_x=Math.ceil($(startobj).width())/2;
+        canvas_end_x=width-Math.ceil($(endobj).width())/2;
+    }else{
+        startx=Math.ceil($(endobj).offset().left);
+        endx=Math.ceil($(startobj).offset().left+$(startobj).width());
+        
+        width=(endx-startx);
+        
+        canvas_start_x=Math.ceil($(endobj).width())/2;
+        canvas_end_x=width-Math.ceil($(startobj).width())/2;
+    }
+    
+    if($(startobj).offset().top<$(endobj).offset().top){
+        starty=Math.ceil($(startobj).offset().top);
+        endy=Math.ceil($(endobj).offset().top+$(endobj).height());
+        
+        height=(endy-starty);
+        
+        canvas_start_y=Math.ceil($(startobj).height())/2;
+        canvas_end_y=height-Math.ceil($(endobj).height())/2;
+    }else{
+        starty=Math.ceil($(endobj).offset().top);
+        endy=Math.ceil($(startobj).offset().top+$(startobj).height());
+        
+        height=(endy-starty);
+        
+        canvas_start_y=Math.ceil($(endobj).height())/2;
+        canvas_end_y=height-Math.ceil($(startobj).height())/2;
+    }     
+    
+    
+    return {
+        'position':{
+            'left':startx,
+            'top':starty,
+            'width':width,
+            'height':height
+        },
+        'canvas':{
+            'start':{
+                'x':canvas_start_x,
+                'y':canvas_start_y
+            },
+            'end':{
+                'x':canvas_end_x,
+                'y':canvas_end_y
+            }
+        }
+    };
+}
+barramento_position2('ac','dm')
+$('[el]').each(function(){
+    var id=$(this).attr('el');
+    var barramento = $(this).attr('barramento').split(',')
+    for(var i=0;i<barramento.length;i++){
+        if(barramento[i].trim()!=""){
+            var id_barramento=id+"_"+barramento[i];
+            var positions=barramento_position2(id,barramento[i]);
+            var obj=$('<canvas></canvas>').addClass('linecanvas').attr({'id':id_barramento}).css(positions.position);
+            
+            var canvas_line=positions.canvas;
+            $(obj).drawLine({
+              strokeStyle: "#00ff00",
+              strokeWidth: 10,
+              x1: canvas_line.start.x, y1: canvas_line.start.y,
+              x2: canvas_line.end.x, y2: canvas_line.end.y,
+            })
+            
+            $('body').append(obj);
+        
+        }
+    }
+});
+/*
+Exception: $(...).offset(...) is undefined
+barramento_position2@Scratchpad/2:6
+@Scratchpad/2:68
+.each@http://simulador.maxfs.com/Scripts/jquery.js:2
+v.prototype.each@http://simulador.maxfs.com/Scripts/jquery.js:2
+@Scratchpad/2:62
+*/
+/*
+Exception: $(...).offset(...) is undefined
+barramento_position2@Scratchpad/2:6
+@Scratchpad/2:69
+.each@http://simulador.maxfs.com/Scripts/jquery.js:2
+v.prototype.each@http://simulador.maxfs.com/Scripts/jquery.js:2
+@Scratchpad/2:63
+*/
+/*
+Exception: $(...).offset(...) is undefined
+barramento_position2@Scratchpad/2:6
+@Scratchpad/2:69
+.each@http://simulador.maxfs.com/Scripts/jquery.js:2
+v.prototype.each@http://simulador.maxfs.com/Scripts/jquery.js:2
+@Scratchpad/2:63
+*/

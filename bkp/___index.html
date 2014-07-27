@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Simulador</title>
+        <link href="css/estilo.css" rel="stylesheet"/>
+        <script src="Scripts/jquery.js"></script>
+        <script src="Scripts/jquery-ui.js"></script>
+        <script src="modelo/processador1/cfg.js"></script>
+        <script>
+            function valor(el,value){
+                if(value==undefined){
+                    return $('[el="'+el+'"]').ler();
+                }else{
+                    $('[el="'+el+'"]').gravar(value);
+                }
+            }
+            (function($){
+                $.fn.memoria = function(processador){
+                    var memoriaObj = $('<table></table>').addClass('memoria').attr({'id':'memoria_principal','el':processador.memoria.nome,'pointer':processador.memoria.apontador_endereco});
+                    memoriaObj.append("<tr><td>ADD</td><td>VAL</td></tr>");
+                    var memoria = processador.memoria.size;
+                    var val="";
+                    for(var i=0;i<memoria.toString().length;i++){
+                        val+="0"
+                    }
+                    for(var i=0;i<memoria;i++){
+                        memoriaObj.append("<tr><td>"+i+"</td><td arr='"+i+"'>"+val+"</td></tr")
+                    }
+                    $(this).append(memoriaObj);
+                }
+                $.fn.display=function(id,processador){
+                    var val="";
+                    for(var i=0;i<=memoria.length;i++){
+                        val+="0"
+                    }
+                    $(this).append("<li><div><span class='indicador_periferico'></span><span class='valor_periferico' id='"+id+"'>"+val+"</span><div></li>");
+                    $(this).mostrar=function(id,val){
+                        $("span#"+id).html(val);
+                    }
+                    return $(this);
+                }
+                $.fn.numberkeyboard=function(processador){
+                    var divContainer=$('div').addClass('numberkeyboard');
+                    $('body').append(divContainer);
+                    var input=$('<input class="valor" id="valor" disabled="disabled">');
+                    var backspace=$('<a class="backspace"></a>').click(function(){
+                        var valor = input.val();
+                        input.val(valor.substr(0,(valor.length-1)));
+                    });
+                    divContainer.append(input);
+                    divContainer.append(backspace);
+                    for(var i=0;i<10;i++){
+                        divContainer.append('<a class="number" val="'+i+'">'+i+'</a>').click(function(){
+                            var valor=$(this).attr('val');
+                            input.val(input.val()+""+valor);
+                        });
+                    }
+                    divContainer.append('<a class="confirm"></a>').click(function(){
+                        $('[barramento="per"]').html(input.val());
+                    });
+                    return $(this);
+                }
+                $.fn.registrador=function(reg){
+                    var memoria = reg.size;
+                    var val="";
+                    for(var i=0;i<memoria.toString().length;i++){
+                        val+="0"
+                    }
+                    var el_reg=$('<div></div>').attr({'el':reg.nome,'pointer':''}).addClass('registrador').css({'margin-top':reg.orientacao.y,'margin-left':reg.orientacao.x});
+                    el_reg.append($('<div></div').addClass('nome').html(reg.nome_exibicao));
+                    el_reg.append($('<div></div>').addClass('valor').html(val));
+                    
+                    $(this).append(el_reg);
+                }
+                $.fn.gravar=function(value){
+                    var pointer=$(this).attr('pointer');
+                    if(pointer!=''){
+                        var indicador=$('[el="'+pointer+'"]').ler();
+                        $(this).find('[arr="'+indicador+'"]').html(value);
+                    }else{
+                        $(this).find('.valor').html(value);
+                    }
+                }
+                $.fn.ler=function(){
+                    var pointer=$(this).attr('pointer');
+                    if(pointer!=''){
+                        var indicador=$('[el="'+pointer+'"]').ler();
+                        return $(this).find('[arr="'+indicador+'"]').html();
+                    }else{
+                        return $(this).find('.valor').html();
+                    }
+                }
+                $.fn.auxiliares=function(reg){
+                    
+                    var memoria = reg.size;
+                    var val="";
+                    for(var i=0;i<memoria.toString().length;i++){
+                        val+="0"
+                    }
+                    var el_reg=$('<div></div>').attr({'el':reg.nome,'pointer':reg.apontador_endereco}).addClass('registrador_auxiliar').css({'margin-top':reg.orientacao.y,'margin-left':reg.orientacao.x});
+                    var reg_tbl=$('<table></table>');
+                    reg_tbl.append("<tr><td colspan='2'>"+reg.nome_exibicao+"</td></tr>");
+                    reg_tbl.append("<tr><td>ADD</td><td>VAL</td></tr>");
+                    
+                    for(var i=0;i<reg.arr;i++){
+                        reg_tbl.append("<tr><td>"+i+"</td><td arr='"+i+"'>"+val+"</td></tr")
+                    }
+                    el_reg.append(reg_tbl);
+                    $(this).append(el_reg);
+                }
+                $.fn.unidade_funcional=function(unidade){
+                    var unidadeObj=$('<div></div>').addClass('unidade_funcional').css(unidade.style);
+                    var regs=unidade.elementos;
+                    for(var i=0;i<regs.length;i++){
+                        var memoria = regs[i].size;
+                        var val="";
+                        for(var u=0;u<memoria.toString().length;u++){
+                            val+="0"
+                        }
+                        var min_reg=$('<div></div>')
+                        .attr({'el':regs[i].nome,'pointer':''})
+                        .addClass('registrador')
+                        .css(regs[i].style);
+                        
+                        min_reg.append($('<div></div').addClass('nome').html(regs[i].nome_exibicao));
+                        min_reg.append($('<div></div>').addClass('valor').html(val));
+                        
+                        unidadeObj.append(min_reg)
+                    }
+                    $(this).append(unidadeObj);
+                }
+            })(jQuery)
+            var col="";
+            $(document).ready(function(){
+                $('#memoria').memoria(processador)
+                var registradores=processador.registradores;
+                for(var i=0;i<registradores.length;i++){
+                    $('#processador').registrador(registradores[i]);
+                }
+                var registradoresaux=processador.registradores_auxilixares;
+                for(var i=0;i<registradoresaux.length;i++){
+                    $('#processador').auxiliares(registradoresaux[i]);
+                }
+                var unidades_funcionais=processador.unidades_funcional;
+                for(var i=0;i<unidades_funcionais.length;i++){
+                    $('#processador').unidade_funcional(unidades_funcionais[i]);
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="computador">
+            <div id="memoria"></div>
+            <div id="processador">
+
+                <div class="registrador">
+                    <div class="nome">EM</div>
+                    <div class="valor">000</div>
+                </div>
+
+                <div class="registrador Arr">
+                    <table>
+                        <tr>
+                            <td>End.</td>
+                            <td>Dado</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>000</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>000</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="ula">
+                    <div class="min_registrador A">
+                        <div class="nome">A</div>
+                        <div class="valor">000</div>
+                    </div>
+                    <div class="min_registrador B">
+                        <div class="nome">B</div>
+                        <div class="valor">000</div>
+                    </div>
+                    <div class="min_registrador C">
+                        <div class="nome">C</div>
+                        <div class="valor">000</div>
+                    </div>
+                    <div class="min_registrador Z">
+                        <div class="nome">Z</div>
+                        <div class="valor">000</div>
+                    </div>
+                    <div class="min_registrador P">
+                        <div class="nome">P</div>
+                        <div class="valor">000</div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="perifericos">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,530 @@
+/* 
+    Document   : estilo
+    Author     : Anderson Rocha
+    
+*/
+.draggable{
+    background-color:#fff;
+}
+.registrador_auxiliar{
+    width:60px;
+}
+.registrador_auxiliar ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    width:60px;
+}
+.registrador_auxiliar ul li{
+    margin:0;
+    padding:0;
+    width:60px;
+}
+.registrador_auxiliar ul li div{
+    float:left;
+    width:20px;
+    margin-right:10px;
+    
+}
+.registrador_auxiliar ul li div.label{
+    text-align:center;
+}
+.registrador_auxiliar ul li div.name{
+    text-align:center;
+    
+}
+.registrador_auxiliar ul li div.value{
+    text-align:center; 
+}
+body{
+    font-size: 12px;
+    text-align: center;
+}
+
+.container{
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color:#5ea1db;
+    min-height: 500px;
+}
+.header{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    background-color:#4c4c4c; 
+    height:10%;
+}
+.center{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:90%;
+}
+.box-title span{
+    color:#003193;
+    font-size: 20px;
+}
+
+#computador{
+    width:900px;
+    height:500px;
+    position:absolute;
+    left:50%;
+    margin-left:-450px;
+    top:50%;
+    margin-top:-250px;
+    border-radius: 15px;
+}
+/*MEMORIA*/
+.memoria-box{
+    width: 180px;
+    height:450px;
+    margin: 15px;
+    background-color: #43779c;
+    border-radius: 15px 0px 0px 15px ;
+    display:block;
+    float:left;
+    background-image: url(../images/jump_esq.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 20;
+    position: relative;
+}
+.memoria-box table{
+    border:0 solid #000;
+}
+.memoria-box table{
+    width: 100%;
+}
+.memoria-box table tbody{
+    width: 100%;
+}
+.memoria-box table td{
+    border-bottom:2px solid #6495bb;
+    border-right:2px solid #6495bb;
+    margin: 0px;
+}
+.memoria-box table td:last-child{
+    border-right:none;
+}
+#memoria-content{
+    overflow:hidden ;
+    width:150px;
+    height: 410px;
+}
+/* END MEMORIA*/
+
+/*PROCESSADOR*/
+.processador_info_btn{
+    position:absolute;
+    right:-15px;
+    top:-15px;
+    z-index: 50;
+}
+
+.processador-box {
+    width:480px;
+    height:460px;
+    background: #43779c;
+    overflow: hidden;
+    border-radius: 15px;
+    display:block;
+    float:left;
+    position: relative;
+    margin: 10px 0px;
+}
+#processador {
+    width:442px;
+    height:395px;
+    border: 4px #191919 outset;
+    background-color:#222222;
+    position: relative;
+    margin: 15px;
+    margin-bottom: 5px;
+}
+#processador_info_area{
+    position: absolute;   
+    display:none;
+    left: -146px;
+    top: 17px;
+    background-color: rgba(80,80,80,0.9);
+    width: 155px;
+    color: #dfdfdf;
+    border: 1px #bfbfbf solid;
+}
+#processador_info_area span{
+    display:block;
+}
+#processador_info_area strong{
+    display:block;
+}
+#aux_memoria_area{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50px;
+    left: -18px;
+}
+#aux_periferico_area{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50px;
+    left: 450px;
+}
+#unidade_controle{
+    width:442px;
+    height:20px;
+    border: 4px #191919 outset;
+    background-color:#222222;
+    position: relative;
+    margin: 15px;
+    margin-top:5px;
+    z-index: 20;
+}
+/*END PROCESSADOR*/
+
+/*PERIFERICOS*/
+#perifericos{
+    padding:0;
+}
+.perifericos-box{
+    width: 180px;
+    height:450px;
+    margin: 15px;
+    background-color: #43779c;
+    border-radius: 0px 15px 15px 0px ;
+    display:block;
+    float:left;
+    background-image: url(../images/jump_dir.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    z-index: 20;
+    position: relative;
+}
+.perifericos-box table{
+    border:0 solid #000;
+}
+.perifericos-box ul{
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.controlador_per{
+    padding: 2px;
+    border: 4px outset rgb(25, 25, 25);
+    background-color: rgb(34, 34, 34);
+    position: relative;
+    margin: 10px;
+    margin-left: 20px;
+    height:20px;
+}
+.perifericos-box ul li{
+    width: 100%;
+    padding:0;
+    margin: 0;
+    margin-top: 5px;
+    background-color:#315772;
+    border-radius: 0px 15px 15px 0px;
+    background-image: url(../images/jump_per.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    border-radius: 0px 5px 5px 0px;
+    height: 30px;
+}
+.perifericos-box ul li .title{
+    font-size: 10px;
+    line-height: 30px;
+    width: 60px;
+    display: block;
+    text-align: left;
+    margin-left: 20px;
+    overflow: hidden;
+    height: 30px;
+    float:left;
+}
+.perifericos-box ul li .value{
+    float: left;
+    margin-left: 10px;
+    line-height: 30px;
+    float:left;
+}
+.perifericos-box ul li a{
+    float: right;
+    height: 28px !important;
+}
+
+#perifericos-box{
+    overflow:hidden ;
+    width:150px;
+    height: 410px;
+    padding:5px;
+}
+#perifericos-content{
+    margin-left: 20px;
+    width: 150px;
+    height: 355px;
+}
+#tipo_periferico{
+    width:100px;
+    height: 20px;
+    font-size: 10px;
+}
+/*END PERIFERICOS*/
+
+
+.col{
+    width: 75px;
+    height: 100%;
+    background: #FF10FF;
+    margin-left: 20px;
+    float: left;
+    margin-top: 15px;
+}
+.registrador{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    z-index:20;
+    padding:0;
+}
+.functional-unit{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    z-index:20;
+    padding:0;
+}
+.registrador_auxiliar{
+    width: 65px;
+    position: absolute;
+    z-index:20;
+}
+.nome{
+    height: 15px;
+    background-color: rgb(148, 148, 148);
+    border-width: 1px 1px medium;
+    border-style: solid solid none;
+    border-color: rgb(75, 75, 75) rgb(75, 75, 75) -moz-use-text-color;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 5px 5px 0px 0px;
+}
+.valor{
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 0px;
+    background-color: rgb(173, 173, 173);
+    border-right: 1px solid rgb(75, 75, 75);
+    border-width: medium 1px 1px;
+    border-style: none solid solid;
+    border-color: -moz-use-text-color rgb(75, 75, 75) rgb(75, 75, 75);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 0px 0px 5px 5px;
+}
+.unidade_funcional{
+    z-index:20;
+    position: absolute;
+}
+.button{
+    background-color:#bebebe;
+    padding-left:5px;
+    padding-right:5px;
+    float:left;
+    margin-left:5px;
+    border-style: outset;
+    border-radius:5px;
+    width:20px;
+    height:20px;
+    color:#000;
+}
+.button:active{
+    border-style: inset;
+}
+#clock_area{
+    float:left;
+}
+#clock{
+    float:left;
+}
+canvas{
+    z-index:5;
+    position:absolute;
+    left:0;
+
+}
+
+.registrador_auxiliar table {
+    background-color: rgb(173, 173, 173);
+    border-radius: 5px 5px 5px 5px;
+    width:100%;
+    border-style: solid;
+    border-width: 1px;
+}
+.registrador_auxiliar table td[colspan]{
+    height: 15px;
+    border:none;
+    background-color: rgb(148, 148, 148);
+    border-radius: 5px 5px 0px 0px;
+    
+}
+.address{
+    font-weight: bold;
+}
+.registrador_auxiliar table td{
+    border: 1px solid rgb(219, 219, 219);
+    margin: 0px;
+    padding: 0px;
+    border-radius: 5px 5px 5px 5px;
+}
+/** NANO SCROLLBAR STYLE **/
+
+
+.box_scrollbar { width: 500px; height: 500px; }
+.box_scrollbar .content { padding: 10px; }
+.box_scrollbar .pane   { background: #888; }
+.box_scrollbar .slider { background: #111; }
+
+.box_scrollbar {
+    position : relative;
+    width    : 100%;
+    height   : 100%;
+    overflow : hidden;
+}
+.box_scrollbar .content {
+    position      : absolute;
+    overflow      : scroll;
+    overflow-x    : hidden;
+    top           : 0;
+    right         : 0;
+    bottom        : 0;
+    left          : 0;
+}
+.box_scrollbar .content:focus {
+    outline: thin dotted;
+}
+.box_scrollbar .content::-webkit-scrollbar {
+    visibility: hidden;
+}
+.has-scrollbar .content::-webkit-scrollbar {
+    visibility: visible;
+}
+.box_scrollbar > .pane {
+    background : rgba(0,0,0,.25);
+    position   : absolute;
+    width      : 10px;
+    right      : 0;
+    top        : 0;
+    bottom     : 0;
+    visibility : hidden\9; /* Target only IE7 and IE8 with this hack */
+    opacity    : .01; 
+    -webkit-transition    : .2s;
+    -moz-transition       : .2s;
+    -o-transition         : .2s;
+    transition            : .2s;
+    -moz-border-radius    : 5px;
+    -webkit-border-radius : 5px;  
+    border-radius         : 5px;
+}
+.box_scrollbar > .pane > .slider {
+    background: #444;
+    background: rgba(0,0,0,.5);
+    position              : relative;
+    margin                : 0 1px;
+    -moz-border-radius    : 3px;
+    -webkit-border-radius : 3px;  
+    border-radius         : 3px;
+}
+.box_scrollbar:hover > .pane, .pane.active, .pane.flashed {
+    visibility : visible\9; /* Target only IE7 and IE8 with this hack */
+    opacity    : 0.99;
+}
+.box-assembly{
+    width: 80%;
+    height: 80%;
+    resize: none;
+    
+}
+
+/* SITE */
+.site-center{
+    position:fixed;
+    top:15%;
+    left:0;
+    right:0;
+    bottom:5%;
+    width:960px;
+    margin:0 auto;
+}
+.menu ul{
+    list-style:none;
+}
+.menu ul li{
+    margin-left:5px;
+    margin-right:5px;
+    padding:2px 10px;
+    display:inline;
+}
+
+.menu ul li a,.menu ul li a:link{
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:145%;
+}
+.menu ul li a:hover{
+    color:#B3BCFC;
+}
+.site-box-conteudo{
+    border-radius:15px;
+    background-color:#43779c;
+    min-width:100%;
+    min-height:100%;    
+}
+
+.site-conteudo{
+    margin: 25px;
+    width: 95%;
+    height: 400px;
+}
+.site-processador-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.site-processador-list li a{
+    text-decoration:none;
+    color: #000;
+    border:#5ea1db dashed 1px;
+    display:block;
+    width:98%
+}
+.site-processador-list li a div h3{
+    font-weight:bold;
+    text-align:left;
+    padding-left:20px
+}
+.site-processador-list li a div p{
+    text-align:justify;
+    margin-left:20px;
+    margin-right:20px;
+}
+/* END SITE */
+
+
+.hightlight{
+    background-color: #fff;
+}
