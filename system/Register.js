@@ -27,8 +27,8 @@ Register.prototype.render= function(selector){
     this.selector = selector;
     $(selector).append(this.regObj);
 }
-Register.prototype.select=function(){
-    $(this.regObj).highlight();
+Register.prototype.select=function(hide){
+    $(this.regObj).highlight(hide);
 }
 Register.prototype.read=function(){
     return this.store.read();

@@ -16,18 +16,22 @@ window.FunctionalUnit = function(config){
 
 FunctionalUnit.prototype.render=function(selector){
 	var regObj = $('<div>').attr(this.attributes).addClass('functional-unit draggable').css(this.css);
+    
+    var regContainer=$('<div>').addClass('relative');
 
     var registers={};
 
     this.registersConf.forEach(function(reg){
         registers[reg.name]=new Register(reg);
-        registers[reg.name].render(regObj);
+        registers[reg.name].render(regContainer);
     });
-
+    
+    regObj.append(regContainer);
+    
     this.regObj=regObj;
 
     this.registers=registers;
 
     this.selector = selector;
-    $(selector).append(this.regObj);
+    $(selector).append(this.regObj);    
 };

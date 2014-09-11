@@ -1,0 +1,136 @@
+*{
+	font-size: 95%;
+	font-family: "Arial"
+}
+body{
+	background-color:#5ea1db;
+	color:#003193;
+}
+
+header, .header{
+	width: 100%;
+	height: 50px;
+	background-color: #4c4c4c;
+	text-align: center;	
+}
+
+.menu{
+	color:#fff;
+	font-size: 2em;
+	line-height: 50px;
+}
+.menu ul{
+	list-style: none;
+}
+.menu ul li{
+	width: auto;
+	height: 50px;
+	display: inline;
+	margin:0 20px;
+}
+.menu ul li a, .menu ul li a:hover{
+	color:#fff;
+	text-decoration: none;
+}
+.menu ul li a.active{
+	color:#003193;
+}
+
+.container{
+	background-color: #43779c;
+	height: auto;
+}
+h1,h2,h3,h4,h5,h6{
+	font-weight: bold;
+}
+.site-processador-list{
+	list-style:none;
+	padding:0;
+
+}
+.site-processador-list li{
+	border-bottom:1px dashed #efefef;
+	
+}
+.container{
+	color:#000;
+}
+/** NANO SCROLLBAR STYLE **/
+
+
+.box_scrollbar { width: 500px; height: 500px; }
+.box_scrollbar .content { padding: 10px; }
+.box_scrollbar .pane   { background: #888; }
+.box_scrollbar .slider { background: #111; }
+
+.box_scrollbar {
+    position : relative;
+    width    : 100%;
+    overflow : hidden;
+}
+.box_scrollbar .content {
+    position      : absolute;
+    overflow      : scroll;
+    overflow-x    : hidden;
+    top           : 0;
+    right         : 0;
+    bottom        : 0;
+    left          : 0;
+}
+.box_scrollbar .content:focus {
+    outline: thin dotted;
+}
+.box_scrollbar .content::-webkit-scrollbar {
+    visibility: hidden;
+}
+.has-scrollbar .content::-webkit-scrollbar {
+    visibility: visible;
+}
+.box_scrollbar > .pane {
+    background : rgba(0,0,0,.25);
+    position   : absolute;
+    width      : 10px;
+    right      : 0;
+    top        : 0;
+    bottom     : 0;
+    visibility : hidden\9; /* Target only IE7 and IE8 with this hack */
+    opacity    : .01; 
+    -webkit-transition    : .2s;
+    -moz-transition       : .2s;
+    -o-transition         : .2s;
+    transition            : .2s;
+    -moz-border-radius    : 5px;
+    -webkit-border-radius : 5px;  
+    border-radius         : 5px;
+}
+.box_scrollbar > .pane > .slider {
+    background: #444;
+    background: rgba(0,0,0,.5);
+    position              : relative;
+    margin                : 0 1px;
+    -moz-border-radius    : 3px;
+    -webkit-border-radius : 3px;  
+    border-radius         : 3px;
+}
+.box_scrollbar:hover > .pane, .pane.active, .pane.flashed {
+    visibility : visible\9; /* Target only IE7 and IE8 with this hack */
+    opacity    : 0.99;
+}
+.box-assembly{
+    width: 80%;
+    height: 80%;
+    resize: none;
+    
+}
+
+/*bootstrap theme*/
+.modal-content{
+    background-color:#5ea1db;
+}
+
+.modal-header {
+    border-bottom: 1px solid #43779C;
+}
+.modal-footer {
+    border-top: 1px solid #43779C;
+}

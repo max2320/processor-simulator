@@ -1,98 +1,111 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Simulador</title>
-        <link href="css/estilo_definitivo.css" rel="stylesheet" />
-        <link href="css/devices.css" rel="stylesheet" />
-        <link href="css/jquery-ui.css" rel="stylesheet" />
-        
-        <script src="Scripts/jquery.js"></script>
-        <script src="Scripts/jquery-ui.js"></script>
-        <script src="Scripts/nanoscroller.js"></script>
-        
-        <script src="sistema/Init.js"></script>
-        <script src="processadores/sergium/cfg.js"></script>
-    </head>
+    <?php include 'includes/header.php' ?>
     <body>
-        <div class="container">
-            <div class="header">
-                <?php include 'includes/menu.php' ?>
-            </div>
-            <div class="center">
-                <div id="computador">
-                    
-                    <div class="memoria-box">
-                        <div class="box-title">
-                            <span>MEM&Oacute;RIA</span>
-                        </div>
+        <header class="header">
+            <?php include 'includes/menu.php' ?>
+        </header>
+
+        <link href="css/simulator.css" rel="stylesheet">
+
+        <script src="system/Init.js"></script>
+        <script src="processor/sergium/cfg.js"></script>
+
+
+        <div id="computador" class="row">
+                
+                <div class="col-xs-3 col-sm-3">
+                    <div class="content-computer-area">
+                        <h3>MEM&Oacute;RIA</h3>
                         <div id="memoria-content" class="box_scrollbar">
                             <div memoryarea="memoryarea" class="content"></div>
                         </div>
                     </div>
-                    <div class="processador-box">
-                        <div id="processador">
-                            <div class="processador_info_btn">
-                                <span id="processador_info" class="button" icon="note"></span>
-                                <script>
-                                    $('#processador_info').hover(function(){
-                                        $('#processador_info_area').css('display','block');
-                                    },function(){
-                                        $('#processador_info_area').css('display','none');
-                                    })
-                                </script>
-                                <div id="processador_info_area">
-                                    <span procinfo="nome">
-                                        <strong>Processador:</strong>
-                                    </span>
-                                    <span procinfo="descricao">
-                                        <strong>Descrição:</strong>
-                                    </span>
-                                    <span procinfo="arquitetura">
-                                        <strong>Arquitetura:</strong>
-                                    </span>
-                                    <span procinfo="memoria.size">
-                                        <strong>Tamanho Memória:</strong>
-                                    </span>
-                                </div>
-                            </div>
-                            <div id="aux_memoria_area"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="content-computer-area">
+                        <div id="processador" class="computer-element">
                             <canvas id="fullcanvas" height="395" width="442"></canvas>
-                            <div id="aux_periferico_area"></div>
-                            <div processorarea='processorarea'></div>
-                        </div>
-                        <div id="unidade_controle">
-                            <div id="clock_area">
-                                <a class="button" icon="minus" subclock=""></a>
-                                <input disabled="disabled" type="text" id="clock" value="1000" style="width: 35px; height: 14px; font-size: 12px;" />
-                                <a class="button" icon="plus" addclock=""></a>
+                            <div processorarea='processorarea'>
+                                <div id="aux_periferico_area"></div>
+                                <div id="aux_memoria_area"></div>
                             </div>
-                            <a class="button" icon="play" onclick="start_processamento();"></a>
-                            <a class="button" icon="pause" style="display:none;" onclick="stop_processamento();"></a>
-                            <a class="button" icon="seek-first" onclick="reset_processamento();"></a>
-                            <a class="button" icon="script" onclick="editor_assembly();" title="editor"></a>
-                            
-                            <script src="sistema/clock.js"></script>
-                            <script src="processadores/<?php echo $_GET['simulador']?>/programateste.js"></script>
+                        </div>
+                        <div id="controlUnitArea" class="computer-element">
+                            <button type="button" id="ctrlClockMinus">-</button>
+                            <input disabled="disabled" type="text" id="ctrlClockCicleTimeDisplay" value="1000" style="width: 35px;" />
+                            <button type="button" id="ctrlClockPlus">+</button>
+                            <button type="button" id="ctrlClockStart">></button>
+                            <button type="button" id="ctrlClockStop" style="display:none;">||</button>
+                            <button type="button" onclick="reset_processamento();">|></button>
+                            <button type="button" onclick="editor_assembly();" title="editor"><\></button>
+                            <button type="button" id="configPanel" title="Painel de configuração">*</button>
+                            <script>
+                                var defaultCicleTime=1000;
+                                $('#ctrlClockMinus').click(function(){
+                                    var time=defaultCicleTime-100;
+                                    if(time>=100){
+                                        defaultCicleTime=time;
+                                    }
+                                    $('#ctrlClockCicleTimeDisplay').val(defaultCicleTime);
+                                });
+                                $('#ctrlClockPlus').click(function(){
+                                    var time=defaultCicleTime+100;
+                                    if(time<30000){
+                                        defaultCicleTime=time;
+                                    }
+                                    $('#ctrlClockCicleTimeDisplay').val(defaultCicleTime);
+                                });
+                                $('#ctrlClockStart').click(function(){
+                                    if(motherBoard!=undefined){
+                                        motherBoard.startProcessing(defaultCicleTime);
+                                        $('#ctrlClockStart').css({'display':'none'});
+                                        $('#ctrlClockStop').css({'display':''});
+                                    }
+
+                                });
+                                $('#ctrlClockStop').click(function(){
+                                    if(motherBoard!=undefined){
+                                        motherBoard.stopProcessing(defaultCicleTime);
+                                        $('#ctrlClockStop').css({'display':'none'});
+                                        $('#ctrlClockStart').css({'display':''});
+                                    }
+                                });
+                                $('#configPanel').click(function(){
+                                    motherBoard.configPanel();
+                                });
+                            </script>
                         </div>
                     </div>
-                    <div class="perifericos-box">
-                        <div class="box-title">
-                            <span>PERIF&Eacute;RICOS</span>
-                        </div>
-                        <div class="controlador_per">
-                            <select id="tipo_periferico" name="tipo_periferico" style="float:left">
-                                <option value="display">Display</option>
-                                <option value="numberkeypad">Number Key Pad</option>
-                            </select>
-                            <a class="button" icon="plus" id="ADD_periferico"></a>
-                            <script src="sistema/devices.js"></script>
-                        </div>
-                        <div id="perifericos-content" class="box_scrollbar">
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <div class="content-computer-area">
+                        <h3>PERIF&Eacute;RICOS</h3>
+                        <div id="perifericos-content" class="box_scrollbar ">
                             <div id="perifericos" class="content">
-                                <ul el="per" barramento="" qtd="0"> 
+                                <ul devicearea="devicearea" class="devices"> 
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="modal fade" id="configPanelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" modaltitle>Configurações</h4>
+                        </div>
+                        <div class="modal-body" modalbody>
+
+                            <div></div>
+                        
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

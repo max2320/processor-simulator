@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Simulador</title>
-        <link href="css/estilo_definitivo.css" rel="stylesheet">
-        <link href="css/jquery-ui.css" rel="stylesheet">
-        <script src="Scripts/jquery.js"></script>
-        <script src="Scripts/jcanvas.js"></script>
-        <script src="Scripts/jquery-ui.js"></script>
-        <script src="Scripts/nanoscroller.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('.box_scrollbar').nanoScroller();
-            });
-        </script>
-    </head>
+    
+    <?php include 'includes/header.php' ?>
     <body>
+        <header class="header">
+            <?php include 'includes/menu.php' ?>
+        </header>
         <div class="container">
-            <div class="header">
-                <?php include 'includes/menu.php' ?>
-            </div>
             <div class="site-center">
                 <div class="site-box-conteudo">
                     <?php include "includes/pages/" . (isset($_GET['page']) ? $_GET['page'] : "index") . ".php"; ?>

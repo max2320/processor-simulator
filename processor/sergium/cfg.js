@@ -16,6 +16,8 @@ addProcessor(
             //Pointers of I/O
             ioPointer:'ees',
             ioData:'des',
+            //pointer
+            programPointer:'cod'
         },
         memory: {
             'size': 255,
@@ -169,85 +171,85 @@ addProcessor(
             },
             'bus': 'per,ac'
         }],
-        funcoes: {
+        functions: {
             init: [
-                "MOV('epi','em')",
-                "MOV('mem','dm')",
-                "MOV('dm','cod')",
-                "SUMEPI()",
-                "MOV('epi','em')",
-                "MOV('mem','dm')",
-                "MOV('dm','ope')",
-                "SUMEPI()"
+                "mov epi em",
+                "mov mem dm",
+                "mov dm cod",
+                "sumone epi ",
+                "mov epi em",
+                "mov mem dm",
+                "mov dm ope",
+                "sumone epi "
             ],
             0: [
-                "MOV('ope','ees')",
-                "MOV('per','des')",
-                "MOV('des','ac')"
+                "mov ope ees",
+                "mov per des",
+                "mov des ac"
             ],
             1: [
-                "MOV('ope','ees')",
-                "MOV('ac','des')",
-                "MOV('des','per')"
+                "mov ope ees",
+                "mov ac des",
+                "mov des per"
             ],
             2: [
-                "MOV('ope','eaux')",
-                "MOV('aux','ac')"
+                "mov ope eaux",
+                "mov aux ac"
             ],
             3: [
-                "MOV('ope','eaux')",
-                "MOV('ac','aux')"
+                "mov ope eaux",
+                "mov ac aux"
             ],
             4: [
-                "MOV('ope','em')",
-                "MOV('mem','dm')",
-                "MOV('dm','ac')"
+                "mov ope em",
+                "mov mem dm",
+                "mov dm ac"
             ],
             5: [
-                "MOV('ope','em')",
-                "MOV('ac','dm')",
-                "MOV('dm','mem')"
+                "mov ope em",
+                "mov ac dm",
+                "mov dm mem"
             ],
             6: [
-                "MOV('ope','ac')"
+                "mov ope ac"
             ],
             10: [
-                "MOV('ac','a')",
-                "MOV('ope','eaux')",
-                "MOV('aux','b')",
-                "SUM()",
-                "MOV('c','ac')"
+                "mov ac a",
+                "mov ope eaux",
+                "mov aux b",
+                "SUM",
+                "mov c ac"
             ],
             11: [
-                "MOV('ac','a')",
-                "MOV('ope','eaux')",
-                "MOV('aux','b')",
-                "SUB()",
-                "MOV('c','ac')"
+                "mov ac a",
+                "mov ope eaux",
+                "mov aux b",
+                "SUB",
+                "mov c ac"
             ],
             12: [
-                "MOV('ac','a')",
-                "MOV('ope','b')",
-                "SUM()",
-                "MOV('c','ac')"
+                "mov ac a",
+                "mov ope b",
+                "SUM",
+                "mov c ac"
             ],
             13: [
-                "MOV('ac','a')",
-                "MOV('ope','b')",
-                "SUB()",
-                "MOV('c','ac')"
+                "mov ac a",
+                "mov ope b",
+                "SUB",
+                "mov c ac"
             ],
             20: [
-                "MOV('ope','epi')"
+                "mov ope epi"
             ],
             21: [
-                "GOZ()"
+                "GOZ"
             ],
             22: [
-                "GOP()"
+                "GOP"
             ],
             23: [
-                "END()"
+                "END"
             ]
         },
         logica: {

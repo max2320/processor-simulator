@@ -3,22 +3,24 @@ function addProcessor(config){
     processorConfigs.push(config);
 }
 var scripts=[
-	"sistema/MotherBoard.js",
-	"sistema/Clock.js",
-	"sistema/Storage.js",
-	"sistema/Memory.js",
-	"sistema/Register.js",
-	"sistema/FunctionalUnit.js",
-	"sistema/AuxRegister.js",
-	"sistema/Processor.js",
+	"system/MotherBoard.js",
+	"system/Clock.js",
+	"system/Storage.js",
+	"system/Memory.js",
+	"system/Register.js",
+	"system/FunctionalUnit.js",
+	"system/AuxRegister.js",
+	"system/Processor.js",
+	"system/Devices.js",
 ];
+var motherBoard;
 $(function(){
 	scripts.forEach(function(src,e){
 		console.log("Class::" + src);
 		$('head').append($('<script>').attr('src',src));
 	});
-	window.motherBoard=new MotherBoard({
+	motherBoard=new MotherBoard({
 		'memorySize':100
 	},processorConfigs);
-	
+	motherBoard.render();
 })

@@ -2,7 +2,7 @@ window.Storage = function(label){
     this.label = label;
     this.labelObj = $('<div>').addClass('name').html(label);
     this.value = 0;
-    this.valueObj = $('<div>').addClass('value').html(MotherBoard.show("0"));
+    this.valueObj = $('<div>').addClass('value').html(MotherBoard.show(this.value));
 
 };
 Storage.prototype.render= function(selector){

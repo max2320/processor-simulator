@@ -1,16 +1,21 @@
-window.Clock = function(){
+window.Clock = function(callback){
     this.timmer;
+
+    if(callback == undefined ){
+    	callback=function(){};;	
+    }
+
+	this.callback=callback;
 };
 Clock.prototype.start= function(ms){
+	var clock=this;
     this.timmer=setInterval(function(){
-        this.pulse();
+        clock.pulse();
     },ms);
 }
 Clock.prototype.pause = function(){
     clearInterval(this.timmer);
 }
 Clock.prototype.pulse=function(){
-    Core.processors.forEach(function(el,e){
-        el.next();
-    });
+    this.callback();
 }

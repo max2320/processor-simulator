@@ -3,6 +3,11 @@
     Author     : Anderson Rocha
     
 */
+
+
+
+
+/*
 .draggable{
     background-color:#fff;
 }
@@ -56,7 +61,7 @@ body{
     right:0;
     top:0;
     background-color:#4c4c4c; 
-    height:10%;
+    height: 45px;
 }
 .center{
     position:absolute;
@@ -81,7 +86,7 @@ body{
     border-radius: 15px;
 }
 /*MEMORIA*/
-.memoria-box{
+/*.memoria-box{
     width: 180px;
     height:450px;
     margin: 15px;
@@ -120,7 +125,7 @@ body{
 /* END MEMORIA*/
 
 /*PROCESSADOR*/
-.processador_info_btn{
+/*.processador_info_btn{
     position:absolute;
     right:-15px;
     top:-15px;
@@ -177,20 +182,21 @@ body{
     top: 50px;
     left: 450px;
 }
-#unidade_controle{
-    width:442px;
-    height:20px;
+#controlUnitArea{
+    width:80%;
+    height:40px;
     border: 4px #191919 outset;
     background-color:#222222;
     position: relative;
     margin: 15px;
     margin-top:5px;
     z-index: 20;
+    text-align: left;
 }
 /*END PROCESSADOR*/
 
 /*PERIFERICOS*/
-#perifericos{
+/*#perifericos{
     padding:0;
 }
 .perifericos-box{
@@ -357,9 +363,6 @@ body{
 #clock_area{
     float:left;
 }
-#clock{
-    float:left;
-}
 canvas{
     z-index:5;
     position:absolute;
@@ -524,7 +527,6 @@ canvas{
 }
 /* END SITE */
 
-
-.hightlight{
-    background-color: #fff;
-}
+.hightlight {
+background-color: #E6FF2C;
+}*/

@@ -35,19 +35,13 @@ window.AuxRegister = function(config) {
 AuxRegister.prototype.render= function(selector){
     this.regObj = $('<div>').attr(this.attributes).addClass('registrador_auxiliar draggable').css(this.css);
 
+    var div_name = $('<div>').addClass('auxregister-name').html(this.name);
 
+    this.regObj.append(div_name);
     var auxRegisterObj = $('<ul>');
-    var li_head = $('<li>').attr({
 
-    });
 
-    var div_address = $('<div>').addClass('lable').html('ADD');
-    var div_value = $('<div>').addClass('value').html('VAL');
-
-    li_head.append(div_address);
-    li_head.append(div_value);
-
-    auxRegisterObj.append(li_head);
+    
 
     var UIArray = [];
     var val = 0;
@@ -66,8 +60,8 @@ AuxRegister.prototype.render= function(selector){
     this.selector=selector;
     this.auxRegisterObj = auxRegisterObj;
 }
-AuxRegister.prototype.selectAddress = function(address){
-    $(this.UIArray[address]).highlight();
+AuxRegister.prototype.selectAddress = function(address,hide){
+    $(this.UIArray[address]).highlight(hide);
     this.selectedAddress=address;
 };
 AuxRegister.prototype.read=function(){

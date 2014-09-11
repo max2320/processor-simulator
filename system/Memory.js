@@ -21,17 +21,17 @@ Memory.prototype.render = function(selector) {
     var memoryObj = $('<ul>').addClass('memory').attr({
         'id': 'memoria_principal',
     });
-    var li_head = $('<li>').attr({
+    // var li_head = $('<li>').attr({
 
-    });
+    // });
 
-    var div_address = $('<div>').addClass('lable').html('ADD');
-    var div_value = $('<div>').addClass('value').html('VAL');
+    // var div_address = $('<div>').addClass('lable').html('ADD');
+    // var div_value = $('<div>').addClass('value').html('VAL');
 
-    li_head.append(div_address);
-    li_head.append(div_value);
+    // li_head.append(div_address);
+    // li_head.append(div_value);
 
-    memoryObj.append(li_head);
+    // memoryObj.append(li_head);
 
     var UIArray = [];
     var val = 0;
@@ -51,9 +51,9 @@ Memory.prototype.render = function(selector) {
     this.selector=selector;
     this.memoryObj = memoryObj;
 };
-Memory.prototype.selectAddress = function(address){
+Memory.prototype.selectAddress = function(address,hide){
     // console.log(this.UIArray[address]);
-    $(this.UIArray[address]).highlight();
+    $(this.UIArray[address]).highlight(hide);
     this.selectedAddress=address;
 };
 
