@@ -118,6 +118,8 @@ Processor.prototype.mov=function(from,to){
             this.memory.selectAddress(this.registers[this.pointers.memoryPointer].read(),false);
             data = this.memory.read();
             break;
+        case 'per':
+            break;
         default:
             this.registers[from].select();
             data = this.registers[from].read();
@@ -127,6 +129,8 @@ Processor.prototype.mov=function(from,to){
         case 'mem':
             this.memory.selectAddress(this.registers[this.pointers.memoryPointer].read(),false);
             this.memory.write(data);
+            break;
+        case 'per':
             break;
         default:
             this.registers[to].select(false);

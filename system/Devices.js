@@ -1,8 +1,25 @@
+/**
+	@param config {
+		"pointer":"",
+		"showName":"", 
+		ui:function(){
+			//renderUI
+		},
+		callback:function(){
+			// callback of UI end
+		},
+
+	}
+*/
 window.Devices = function(config){
 	this.pointerName = config.pointer;
 	this.name = config.showName;
 	this.functionUI = config.ui;
-	this.callback = config.callback;
+	this.callback = function(){
+		if(config.callback()){
+			motherBoard.startProcessing();
+		}
+	};
 	this.store = new Storage();
 }
 
@@ -33,12 +50,16 @@ Devices.prototype.call = function(){
 
 	this.modalHeader = $('<div>').addClass('modal-header');
 	this.modalContent.append(this.modalHeader);
+	var title=$('<h4>').html(this.name);
+	this.modalHeader.append(title);
 
 	this.headerLabel = $('<h4>').addClass('modal-title');
 	this.modalHeader.append(this.headerLabel);
 
-	this.modalBody = $('<div>').addClass('modal-body');
-	this.modalContent.append(this.modalBody);
+	var modalBody = $('<div>').addClass('modal-body');
+	this.modalContent.append(modalBody);
+
+	this.functionUI(this.store,modalBody);
 
 	this.modalFooter = $('<div>').addClass('modal-footer');
 	this.modalContent.append(this.modalFooter);
@@ -60,24 +81,28 @@ Devices.prototype.call = function(){
 	// </div>
 	// </div>
 	// </div>
-	this.functionUI();
+	var thisDevice=this;
+	this.addButton("Confirmar",function(){
+		thisDevice.callback();
+	});
 	this.modal.modal();
+
 }
 
-Devices.prototype.addButton=function(name,click){
+Devices.prototype.addButton = function(name,click){
 	this.modalFooter.append($('<button>').attr({
 		'type':'button',
-	}).addClass('btn btn-default').click(click));
+	}).addClass('btn btn-default').click(click).html(name));
 }
 
-Devices.prototype.activate=function(){
+Devices.prototype.activate = function(){
 	motherBoard.stopProcessing();
-	this.modal.modal();
+	this.call();
 }
 
-Devices.prototype.read=function(){
+Devices.prototype.read = function(){
     return this.store.read();
 }
-Devices.prototype.write=function(value){
+Devices.prototype.write = function(value){
     this.store.write(value);
 }

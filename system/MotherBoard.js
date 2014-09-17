@@ -15,7 +15,7 @@
 
 
 
-window.MotherBoard = function(config,processorConfigs) {
+window.MotherBoard = function(config,processorConfigs,devicesConfig) {
     this.typeRender="decimal"; //hexa, binary
     this.processorRender='[processorarea]';
     this.memoryRender='[memoryarea]';
@@ -44,9 +44,15 @@ window.MotherBoard = function(config,processorConfigs) {
     });
 
     // emd timmer
+    this.interval=1000;
 }
 
 MotherBoard.prototype.startProcessing = function(interval) {
+    if(interval!=undefined){
+        this.interval=interval;
+    }else{
+        interval=this.interval;
+    }
     this.controlUnit.start(interval);
 }
 MotherBoard.prototype.stopProcessing = function() {
@@ -158,11 +164,11 @@ MotherBoard.prototype.configPanel=function(){
     var processorsarea=$('<div>').addClass("row");
    
     ///PROCESSOR
-    var processorsItems=$("<div>").addClass('col-sm-3');
-    this.processors.forEach(function(el){
-        processorsItems.append(el.getDescription());
-    });
-    processorsarea.append(processorsItems)
+        var processorsItems=$("<div>").addClass('col-sm-3');
+        this.processors.forEach(function(el){
+            processorsItems.append(el.getDescription());
+        });
+        processorsarea.append(processorsItems);
     ///END PROCESSOR
 
     //MEMORY
