@@ -1,4 +1,4 @@
-window.Memory = function(size) {
+window.Memory = function(size,program) {
     this.selector = '';
     this.memory_array = new Array();
     this.attributes = {
@@ -7,6 +7,7 @@ window.Memory = function(size) {
         'barramento': '',
     };
     this.size = size;
+    this.program=program;
     var dataArray = new Array();
 
     for(var i=0 ; i < size ; i++){
@@ -15,6 +16,8 @@ window.Memory = function(size) {
 
     this.dataArray=dataArray;
     this.UIArray=new Array();
+
+    this.setProgram(program);
 }
 Memory.prototype.render = function(selector) {
     
@@ -32,7 +35,6 @@ Memory.prototype.render = function(selector) {
     // li_head.append(div_value);
 
     // memoryObj.append(li_head);
-
     var UIArray = [];
     var val = 0;
     this.dataArray.forEach(function(obj,add){
@@ -62,4 +64,18 @@ Memory.prototype.read=function(){
 }
 Memory.prototype.write=function(value){
     this.dataArray[this.selectedAddress].write(value);
+}
+Memory.prototype.getProgram=function(){
+    var program=[];
+    this.dataArray.forEach(function(obj,add){
+        program.push(obj.read());
+    });
+    return program.join("\n");
+}
+Memory.prototype.setProgram=function(str){
+    var program=str.split("\n");
+    var thisMem=this
+    program.forEach(function(cod,add){
+        thisMem.dataArray[add].write(cod);
+    });
 }

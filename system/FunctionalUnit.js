@@ -24,6 +24,7 @@ FunctionalUnit.prototype.render=function(selector){
     this.registersConf.forEach(function(reg){
         registers[reg.name]=new Register(reg);
         registers[reg.name].render(regContainer);
+        this[reg.name]=registers[reg.name];
     });
     
     regObj.append(regContainer);
@@ -35,3 +36,15 @@ FunctionalUnit.prototype.render=function(selector){
     this.selector = selector;
     $(selector).append(this.regObj);    
 };
+FunctionalUnit.prototype.findRegister=function(name){
+    if(name.indexOf('.')!=-1){
+        var name=name.split('.');
+
+        var reg=this.findRegister(name[0]);
+
+        name[0]=undefined;
+        return reg.findRegister(name.join(''));
+    }else{
+        return this.registers[name];
+    }
+}

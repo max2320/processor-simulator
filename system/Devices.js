@@ -84,6 +84,7 @@ Devices.prototype.call = function(){
 	var thisDevice=this;
 	this.addButton("Confirmar",function(){
 		thisDevice.callback();
+		thisDevice.modal.modal('hide');
 	});
 	this.modal.modal();
 
@@ -95,7 +96,13 @@ Devices.prototype.addButton = function(name,click){
 	}).addClass('btn btn-default').click(click).html(name));
 }
 
-Devices.prototype.activate = function(){
+Devices.prototype.activate = function(callback){
+	var thisDevice=this;
+	this.callback= function(){
+		if(callback(thisDevice.read())){
+			motherBoard.startProcessing();
+		}
+	};;
 	motherBoard.stopProcessing();
 	this.call();
 }
@@ -105,4 +112,15 @@ Devices.prototype.read = function(){
 }
 Devices.prototype.write = function(value){
     this.store.write(value);
+}
+Devices.prototype.getDescription=function(){
+    var container=$('<div>').addClass('alert alert-info');
+
+    var line=$('<div>')
+    var label=$('<label>').html("DEV: ");
+    line.append(label);
+    line.append(this.name);
+    container.append(line);
+
+    return container;
 }

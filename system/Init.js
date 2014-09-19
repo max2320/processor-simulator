@@ -32,7 +32,7 @@ $(function(){
 	});
 	motherBoard=new MotherBoard({
 		'memorySize':100
-	},processorConfigs);
+	},processorConfigs,devicesAvailable);
 	motherBoard.render();
 })
 

@@ -19,6 +19,7 @@ window.AuxRegister = function(config) {
         'pointer': config.pointer,
         'size': size,
     }
+    this.pointer= config.pointer;
     this.size= size;
     this.name = config.showName
     this.css = config.css

@@ -12,20 +12,75 @@
 })(jQuery);
 
 
+window.parseBin= function(value,word){
+    if(word==undefined){
+        word=8;
+    }
+    var formated=[];
+    while(value>0){
+        formated.push(value%2);
+        value=value-Math.round(value/2);
+    }
+    for(var i=formated.length;i<word;i++){
+        formated.push('0');
+    }
+    var formatedFinal=[];
+    for(var i=formated.length;i>0;i--){
+        if(i==4){
+            formatedFinal.push(" ");    
+        }
+        formatedFinal.push(formated[i-1]);
+    }
+    return formatedFinal.join('');
+}
+window.parseHexa=function(value){
+    var hexacode={
+        '0000':'0',
+        '0001':'1',
+        '0010':'2',
+        '0011':'3',
+        '0100':'4',
+        '0101':'5',
+        '0110':'6',
+        '0111':'7',
+        '1000':'8',
+        '1001':'9',
+        '1010':'A',
+        '1011':'B',
+        '1100':'C',
+        '1101':'D',
+        '1100':'E',
+        '1101':'F',
+    };
+    var bin=parseBin(value);
+    bin=bin.split(" ");
+    var formated=[];
+    bin.forEach(function(e){
+        formated.push(hexacode[e]);
+    })
+    return formated.join('');
+}
 
 
-
-window.MotherBoard = function(config,processorConfigs,devicesConfig) {
-    this.typeRender="decimal"; //hexa, binary
+window.typeRender="hexa"; //hexa, binary
+window.MotherBoard = function(config,processorConfigs,devicesConfig,program) {
     this.processorRender='[processorarea]';
     this.memoryRender='[memoryarea]';
     this.deviceRender='[devicearea]';
-
-    var memory=new Memory(config.memorySize);
+    if(program==undefined){
+        program="0";
+    }
+    var memory=new Memory(config.memorySize,program);
     this.memory=memory;
     this.memorySize=config.memorySize;
     var devices=new Array();
     this.devices=devices;
+
+    //devices
+    devicesConfig.forEach(function(e){
+        devices.push(new Devices(e));
+    });
+    //end devices
 
     //processors
     var processors=new Array();
@@ -36,6 +91,7 @@ window.MotherBoard = function(config,processorConfigs,devicesConfig) {
         processors[i]= new Processor(e, memory, devices);
     });
     //end processors
+
     // timmer
     this.controlUnit=new Clock(function(){
         processors.forEach(function(e){
@@ -87,24 +143,38 @@ MotherBoard.prototype.simpleDialog = function(w, h, onClose) {
     overlay.fadeIn(600);
 };
 MotherBoard.prototype.render=function(){
+    $(this.memoryRender).html('');
     this.memory.render(this.memoryRender);
     
+    $(this.processorRender).html('');
     var processorRender=this.processorRender;
 
     this.processors.forEach(function(e){
         e.render(processorRender);
     });
+
+    $(this.deviceRender).html('');
+    var deviceRender=this.deviceRender;
+    
+    this.devices.forEach(function(e){
+        e.render(deviceRender);
+    });
 };
 MotherBoard.show = function(value){
     var returnValue="0";
-    switch(this.typeRender){
+    switch(window.typeRender){
         case 'decimal':
             returnValue = value;
             break
         case 'hexa':
+            returnValue=parseHexa(value);
+            break;
+        case 'binary':
+            returnValue=parseBin(value);
             break;
     }
-    return value;
+    console.log(window.typeRender+" "+value+"=>"+returnValue);
+    return returnValue;
 };
 MotherBoard.prototype.config = function(config){
     /*
@@ -173,17 +243,56 @@ MotherBoard.prototype.configPanel=function(){
 
     //MEMORY
         var memoryarea = $("<div>").addClass('col-sm-3');
+
         var memoryLabel = $('<label>').html('Tamanho da memoria');
-        var memoryInput = $('<input>').val(this.memorySize);
+        var memoryInput = $('<input>').val(this.memorySize).css({
+            'width':"100%"
+        });;
 
         memoryarea.append(memoryLabel);
         memoryarea.append(memoryInput);
-
         processorsarea.append(memoryarea);
+
+        
+        var dataRender=$('<label>').html('Base de Exibição');
+        var dataRenderselect=$('<select>').css({
+            'width':"100%"
+        });
+        var opt=['hexa','binary','decimal'];
+        opt.forEach(function(e){
+            var dataRenderOpt=$('<option>').attr('value',e).html(e);
+            if(e==window.typeRender){
+                dataRenderOpt.prop('selected',true);
+            }
+            dataRenderselect.append(dataRenderOpt);
+        });
+        memoryarea.append(dataRender);
+        memoryarea.append(dataRenderselect);
+
     //END MEMORY
 
+    ///PROCESSOR
+        var devicesItems=$("<div>").addClass('col-sm-3');
+        this.devices.forEach(function(el){
+            devicesItems.append(el.getDescription());
+        });
+        processorsarea.append(devicesItems);
+    ///END PROCESSOR
+    ///EDITOR
+        var programArea=$('<div>').addClass('row');
+        var programAreaLine=$('<div>').addClass('col-sm-12');
+        var programAreaLabel=$('<label>').html('Program');
+        var memoryProgram = $('<textarea>').val(this.memory.getProgram()).css({
+            'width':'100%',
+            'height':'200px'
+        });
+        programAreaLine.append(programAreaLabel);
+        programAreaLine.append(memoryProgram);
+        programArea.append(programAreaLine);
 
+    ///EDITOR
     this.configModalBody.append(processorsarea);
+    this.configModalBody.append(programArea);
     //END content
 
 
@@ -195,9 +304,10 @@ MotherBoard.prototype.configPanel=function(){
     var configModal=this.configModal;
     var btnSave= $('<button>').html('Salvar').click(function(){
         configModal.modal('hide');
+        window.typeRender=dataRenderselect.val();
         motherBoard = new MotherBoard({
             'memorySize':memoryInput.val()
-        },processorConfigs);
+        },processorConfigs,devicesAvailable,memoryProgram.val());
         motherBoard.render();
         
     });

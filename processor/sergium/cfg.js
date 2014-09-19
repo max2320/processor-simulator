@@ -184,13 +184,13 @@ addProcessor(
             ],
             0: [
                 "mov ope ees",
-                "mov per des",
+                "mov dev des",
                 "mov des ac"
             ],
             1: [
                 "mov ope ees",
                 "mov ac des",
-                "mov des per"
+                "mov des dev"
             ],
             2: [
                 "mov ope eaux",
@@ -214,30 +214,30 @@ addProcessor(
                 "mov ope ac"
             ],
             10: [
-                "mov ac a",
+                "mov ac ula.a",
                 "mov ope eaux",
-                "mov aux b",
+                "mov aux ula.b",
                 "SUM",
-                "mov c ac"
+                "mov ula.c ac"
             ],
             11: [
-                "mov ac a",
+                "mov ac ula.a",
                 "mov ope eaux",
-                "mov aux b",
+                "mov aux ula.b",
                 "SUB",
-                "mov c ac"
+                "mov ula.c ac"
             ],
             12: [
-                "mov ac a",
-                "mov ope b",
+                "mov ac ula.a",
+                "mov ope ula.b",
                 "SUM",
-                "mov c ac"
+                "mov ula.c ac"
             ],
             13: [
-                "mov ac a",
-                "mov ope b",
+                "mov ac ula.a",
+                "mov ope ula.b",
                 "SUB",
-                "mov c ac"
+                "mov ula.c ac"
             ],
             20: [
                 "mov ope epi"
@@ -249,73 +249,125 @@ addProcessor(
                 "GOP"
             ],
             23: [
-                "END"
+                "end"
             ]
         },
-        logica: {
-            'MOV': function(de, para) {
-                copiar_valor(de, para);
-            },
-            'SUM': function() {
-                var a = parseInt(valor('a'));
-                var b = parseInt(valor('b'));
-                var c = a + b;
-                valor('c', c);
-                if (c === 0) {
-                    valor('z', 1);
-                } else {
-                    valor('z', 0);
+        logic: [
+            {
+                name:"SUM",
+                fn: function() {
+                    console.log('ULA-SUM')
+
+                    var a = this.findRegister('ula.a');
+                    var b = this.findRegister('ula.b');
+                    var c = this.findRegister('ula.c');
+                    var z = this.findRegister('ula.z');
+                    var p = this.findRegister('ula.p');
+                    
+                    a.select()
+                    var aValue=a.read();
+
+                    b.select(false)
+                    var bValue=b.read();
+
+                    var cVal=aValue+bValue;
+
+                    c.select(false);
+                    c.write(cVal);
+
+                    if(cVal==0){
+                        z.select(false);
+                        z.write(1);
+                    }else{
+                        z.select(false);
+                        z.write(0);
+                    }
+                    if(cVal>0){
+                        p.select(false);
+                        p.write(1);   
+                    }else{
+                        p.select(false);
+                        p.write(0);   
+                    }
                 }
-                if (c > 0) {
-                    valor('p', 1);
-                } else {
-                    valor('p', 0);
+            },{
+                name:"SUB",
+                fn: function() {
+                    console.log('ULA-SUB')
+
+                    var a = this.findRegister('ula.a');
+                    var b = this.findRegister('ula.b');
+                    var c = this.findRegister('ula.c');
+                    var z = this.findRegister('ula.z');
+                    var p = this.findRegister('ula.p');
+                    
+                    a.select()
+                    var aValue=a.read();
+
+                    b.select(false)
+                    var bValue=b.read();
+
+                    var cVal=aValue-bValue;
+
+                    c.select(false);
+                    c.write(cVal);
+
+                    if(cVal==0){
+                        z.select(false);
+                        z.write(1);
+                    }else{
+                        z.select(false);
+                        z.write(0);
+                    }
+                    if(cVal>0){
+                        p.select(false);
+                        p.write(1);   
+                    }else{
+                        p.select(false);
+                        p.write(0);   
+                    }
+
                 }
-            },
-            'SUB': function() {
-                var a = parseInt(valor('a'));
-                var b = parseInt(valor('b'));
-                var c = a - b;
-                valor('c', c);
-                if (c === 0) {
-                    valor('z', 1);
-                } else {
-                    valor('z', 0);
+            },{
+                name:"GOZ",
+                fn: function() {
+                    console.log('ULA-GOZ')
+
+                    var z = this.findRegister('ula.z');
+                    var ope = this.findRegister('ope');
+                    var epi = this.findRegister('epi');
+
+                    z.select();
+                    var zVal=z.read();
+
+                    if (zVal === 1) {
+                        ope.select(false)
+                        epi.select(false)
+
+                        epi.write(ope.read());
+                    }
                 }
-                if (c > 0) {
-                    valor('p', 1);
-                } else {
-                    valor('p', 0);
-                }
-            },
-            'GOZ': function() {
-                var z = valor('z');
-                if (z === 1) {
-                    var ope = valor('ope');
-                    valor('epi', ope);
-                }
-            },
-            'GOP': function() {
-                var p = valor('p');
-                if (p === 1) {
-                    var ope = valor('ope');
-                    valor('epi', ope);
-                }
-            },
-            'MINEPI': function() {
-                var epi = valor('epi');
-                epi--;
-                valor('epi', epi);
-            },
-            'SUMEPI': function() {
-                var epi = valor('epi');
-                epi++;
-                valor('epi', epi);
-            },
-            'END': function() {
-                stop_processamento();
+            },{
+                name:"GOP",
+                fn: function() {
+                    console.log('ULA-GOP')
+
+                    var p = this.findRegister('ula.p');
+                    var ope = this.findRegister('ope');
+                    var epi = this.findRegister('epi');
+
+                    p.select();
+                    var pVal=p.read();
+
+                    if (pVal === 1) {
+                        ope.select(false)
+                        epi.select(false)
+
+                        epi.write(ope.read());
+                    }
+                },
             }
-        },
+        ],
         montador:{
             'ENT_PORTA_AC':function(operando){
                 //parse to 0

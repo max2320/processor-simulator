@@ -4,6 +4,7 @@ window.Processor = function(config,memory,device){
 	this.desc=config.description;
 
     this.memory = memory;
+    this.device = device;
 	this.pointers=config.default;
 
 	this.registersConf=config.registers;
@@ -13,6 +14,12 @@ window.Processor = function(config,memory,device){
 	this.functionalUnitConf=config.functionalUnities;
 
 	this.functionsList=config.functions;
+
+    var thisProcessor=this;
+
+    config.logic.forEach(function(e){
+        thisProcessor[e.name]=e.fn;
+    });
 
 	this.buffer=[];
 	this.selector="";
@@ -109,52 +116,98 @@ Processor.prototype.nextStepFunction=function(){
         return this.nextStepFunction();
     }
 }
+Processor.prototype.findRegister=function(name){
+    if(name.indexOf('.')!=-1){
+        var name=name.split('.');
 
+        var reg=this.findRegister(name[0]);
+
+        name[0]=undefined;
+        return reg.findRegister(name.join(''));
+    }else{
+        return this.registers[name];
+    }
+}
+Processor.prototype.end=function(){
+    motherBoard.stopProcessing();
+}
 Processor.prototype.mov=function(from,to){
     console.log(from + ">>" + to);
     var data =0;
     switch(from){
         case 'mem':
-            this.memory.selectAddress(this.registers[this.pointers.memoryPointer].read(),false);
-            data = this.memory.read();
+            this.memory.selectAddress(this.findRegister(this.pointers.memoryPointer).read(),false);
+            data = this.memory.read()
             break;
-        case 'per':
+        case 'dev':
+            var dev=this.device[this.findRegister(this.pointers.ioPointer).read()];
+            var reg=this.findRegister(to);
+            reg.select(false);
+            
+            dev.activate(function(value){
+                reg.write(value);
+                return true;
+            });
             break;
         default:
-            this.registers[from].select();
-            data = this.registers[from].read();
+            var regFrom=this.findRegister(from);
+            if(regFrom.pointer==undefined){
+                regFrom.select();
+            }else{
+                var regPointer=this.findRegister(regFrom.pointer);
+                regPointer.select();
+                regFrom.selectAddress(regPointer.read(),false);
+            }
+            data = regFrom.read();
             break;
     }
     switch(to){
         case 'mem':
-            this.memory.selectAddress(this.registers[this.pointers.memoryPointer].read(),false);
+            this.memory.selectAddress(this.findRegister(this.pointers.memoryPointer).read(),false);
             this.memory.write(data);
             break;
-        case 'per':
+        case 'dev':
+            var dev=this.device[this.findRegister(this.pointers.ioPointer).read()];
+            dev.write(data);
+            
+            dev.activate(function(value){
+                return true;
+            });
             break;
         default:
-            this.registers[to].select(false);
-            this.registers[to].write(data);
+            var regTo=this.findRegister(to);
+            if(regTo.pointer==undefined){
+                regTo.select(false);
+            }else{
+                var regPointer=this.findRegister(regTo.pointer);
+                regPointer.select(false);
+                regTo.selectAddress(regPointer.read(),false);
+            }
+            regTo.write(data);
             break;
     }
 }
 
 Processor.prototype.sumone=function(reg){
-    console.log(reg + "--");
-    this.registers[reg].select();
-    this.registers[reg].write(this.registers[reg].read() + 1);
+    console.log(reg + "++");
+    var reg=this.findRegister(reg);
+    reg.select();
+    reg.write(reg.read() + 1);
 }
 
 Processor.prototype.subone=function(reg){
     console.log(reg + "--");
-    this.registers[reg].select();
-    this.registers[reg].write(this.registers[reg].read() - 1);
+    var reg=this.findRegister(reg);
+    reg.select();
+    reg.write(reg.read() - 1);
 }
 
 Processor.prototype.next=function(){
     var action=this.nextStepFunction().split(' ');
    
     switch(action.length){
+        case 1:
+            this[action[0]]();
         case 2:
             this[action[0]](action[1]);
             break;

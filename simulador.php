@@ -74,6 +74,15 @@
                                 $('#configPanel').click(function(){
                                     motherBoard.configPanel();
                                 });
+                                setInterval(function(){
+                                   if(motherBoard.controlUnit.running){
+                                        $('#ctrlClockStart').css({'display':'none'});
+                                        $('#ctrlClockStop').css({'display':''});
+                                   }else{
+                                        $('#ctrlClockStop').css({'display':'none'});
+                                        $('#ctrlClockStart').css({'display':''});
+                                   }
+                               },100);
                             </script>
                         </div>
                     </div>
