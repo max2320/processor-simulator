@@ -49,8 +49,8 @@ window.parseHexa=function(value){
         '1011':'B',
         '1100':'C',
         '1101':'D',
-        '1100':'E',
-        '1101':'F',
+        '1110':'E',
+        '1111':'F',
     };
     var bin=parseBin(value);
     bin=bin.split(" ");
@@ -64,6 +64,14 @@ window.parseHexa=function(value){
 
 window.typeRender="hexa"; //hexa, binary
 window.MotherBoard = function(config,processorConfigs,devicesConfig,program) {
+
+    this.start={
+        'config':config,
+        'processorConfigs':processorConfigs,
+        'devicesConfig':devicesConfig,
+        'program':program
+    }
+
     this.processorRender='[processorarea]';
     this.memoryRender='[memoryarea]';
     this.deviceRender='[devicearea]';
@@ -113,6 +121,16 @@ MotherBoard.prototype.startProcessing = function(interval) {
 }
 MotherBoard.prototype.stopProcessing = function() {
     this.controlUnit.pause();
+}
+MotherBoard.prototype.reset = function() {
+    this.controlUnit.pause();
+
+    var config = this.start.config;
+    var processorConfigs = this.start.processorConfigs;
+    var devicesConfig = this.start.devicesConfig;
+    var program = this.start.program;
+    motherBoard = new MotherBoard(config, processorConfigs, devicesConfig, program);
+    motherBoard.render();
 }
 
 MotherBoard.prototype.simpleDialog = function(w, h, onClose) {

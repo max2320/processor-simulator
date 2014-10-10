@@ -14,6 +14,7 @@
 window.Devices = function(config){
 	this.pointerName = config.pointer;
 	this.name = config.showName;
+	this.dialogSize = config.dialogSize;
 	this.functionUI = config.ui;
 	this.callback = function(){
 		if(config.callback()){
@@ -42,7 +43,7 @@ Devices.prototype.render = function(selector){
 }
 Devices.prototype.call = function(){
 	this.modal = $('<div>').addClass('modal fade');
-	this.modalDialog = $('<div>').addClass('modal-dialog modal-lg');
+	this.modalDialog = $('<div>').addClass('modal-dialog modal-'+this.dialogSize);
 	this.modal.append(this.modalDialog);
 
 	this.modalContent = $('<div>').addClass('modal-content');

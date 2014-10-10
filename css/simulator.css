@@ -115,5 +115,6 @@ h3{
 	height:50px;
 	border-bottom-width: 5px;
 	border-bottom-color:#000; 
-	display:inline-block;
+	display:block;
+	float:left;
 }

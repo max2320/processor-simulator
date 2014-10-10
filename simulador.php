@@ -2,18 +2,15 @@
 <html>
     <?php include 'includes/header.php' ?>
     <body>
+        <link href="css/simulator.css" rel="stylesheet">
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <script src="system/Init.js"></script>
+        <script src="processor/sergium/cfg.js"></script>
         <header class="header">
             <?php include 'includes/menu.php' ?>
         </header>
-
-        <link href="css/simulator.css" rel="stylesheet">
-
-        <script src="system/Init.js"></script>
-        <script src="processor/sergium/cfg.js"></script>
-
-
-        <div id="computador" class="row">
-                
+        <div class='site'>
+            <div id="computador" class="row">
                 <div class="col-xs-3 col-sm-3">
                     <div class="content-computer-area">
                         <h3>MEM&Oacute;RIA</h3>
@@ -32,58 +29,14 @@
                             </div>
                         </div>
                         <div id="controlUnitArea" class="computer-element">
-                            <button type="button" id="ctrlClockMinus">-</button>
-                            <input disabled="disabled" type="text" id="ctrlClockCicleTimeDisplay" value="1000" style="width: 35px;" />
-                            <button type="button" id="ctrlClockPlus">+</button>
-                            <button type="button" id="ctrlClockStart">></button>
-                            <button type="button" id="ctrlClockStop" style="display:none;">||</button>
-                            <button type="button" onclick="reset_processamento();">|></button>
-                            <button type="button" onclick="editor_assembly();" title="editor"><\></button>
-                            <button type="button" id="configPanel" title="Painel de configuração">*</button>
-                            <script>
-                                var defaultCicleTime=1000;
-                                $('#ctrlClockMinus').click(function(){
-                                    var time=defaultCicleTime-100;
-                                    if(time>=100){
-                                        defaultCicleTime=time;
-                                    }
-                                    $('#ctrlClockCicleTimeDisplay').val(defaultCicleTime);
-                                });
-                                $('#ctrlClockPlus').click(function(){
-                                    var time=defaultCicleTime+100;
-                                    if(time<30000){
-                                        defaultCicleTime=time;
-                                    }
-                                    $('#ctrlClockCicleTimeDisplay').val(defaultCicleTime);
-                                });
-                                $('#ctrlClockStart').click(function(){
-                                    if(motherBoard!=undefined){
-                                        motherBoard.startProcessing(defaultCicleTime);
-                                        $('#ctrlClockStart').css({'display':'none'});
-                                        $('#ctrlClockStop').css({'display':''});
-                                    }
-
-                                });
-                                $('#ctrlClockStop').click(function(){
-                                    if(motherBoard!=undefined){
-                                        motherBoard.stopProcessing(defaultCicleTime);
-                                        $('#ctrlClockStop').css({'display':'none'});
-                                        $('#ctrlClockStart').css({'display':''});
-                                    }
-                                });
-                                $('#configPanel').click(function(){
-                                    motherBoard.configPanel();
-                                });
-                                setInterval(function(){
-                                   if(motherBoard.controlUnit.running){
-                                        $('#ctrlClockStart').css({'display':'none'});
-                                        $('#ctrlClockStop').css({'display':''});
-                                   }else{
-                                        $('#ctrlClockStop').css({'display':'none'});
-                                        $('#ctrlClockStart').css({'display':''});
-                                   }
-                               },100);
-                            </script>
+                            <button title="Reduz Delay" type="button" id="ctrlClockMinus"><i class="fa fa-minus"></i></button>
+                            <input disabled="disabled" type="text" id="ctrlClockCicleTimeDisplay" value="1000" style="width: 60px;" />
+                            <button title="Aumenta Delay" type="button" id="ctrlClockPlus"><i class="fa fa-plus"></i></button>
+                            <button title="Play" type="button" id="ctrlClockStart"><i class="fa fa-play"></i></button>
+                            <button title="Pause" type="button" id="ctrlClockStop" style="display:none;"><i class="fa fa-pause"></i></button>
+                            <button title="Reset" type="button" id="ctrlClockReset"><i class="fa fa-refresh"></i></button>
+                            <!-- <button title="" type="button" onclick="editor_assembly();" title="editor"><\></button> -->
+                            <button title="Painel de Configuração" type="button" id="configPanel" title="Painel de configuração"><i class="fa fa-cog"></i></button>
                         </div>
                     </div>
                 </div>
@@ -100,26 +53,58 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="modal fade" id="configPanelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" modaltitle>Configurações</h4>
-                        </div>
-                        <div class="modal-body" modalbody>
+        <script>
+        $('#controlUnitArea [title]').tooltip();
+            var defaultCicleTime=1000;
+            $('#ctrlClockMinus').click(function(){
+                var time=defaultCicleTime-100;
+                if(time>=100){
+                    defaultCicleTime=time;
+                }
+                $('#ctrlClockCicleTimeDisplay').val(defaultCicleTime);
+            });
+            $('#ctrlClockPlus').click(function(){
+                var time=defaultCicleTime+100;
+                if(time<30000){
+                    defaultCicleTime=time;
+                }
+                $('#ctrlClockCicleTimeDisplay').val(defaultCicleTime);
+            });
+            $('#ctrlClockStart').click(function(){
+                if(motherBoard!=undefined){
+                    motherBoard.startProcessing(defaultCicleTime);
+                    $('#ctrlClockStart').css({'display':'none'});
+                    $('#ctrlClockStop').css({'display':''});
+                }
 
-                            <div></div>
-                        
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            });
+            $('#ctrlClockStop').click(function(){
+                if(motherBoard!=undefined){
+                    motherBoard.stopProcessing(defaultCicleTime);
+                    $('#ctrlClockStop').css({'display':'none'});
+                    $('#ctrlClockStart').css({'display':''});
+                }
+            });
+            $('#ctrlClockReset').click(function(){
+                if(motherBoard!=undefined){
+                    motherBoard.reset();
+                    $('#ctrlClockStop').css({'display':'none'});
+                    $('#ctrlClockStart').css({'display':''});
+                }
+            });
+            $('#configPanel').click(function(){
+                motherBoard.configPanel();
+            });
+            setInterval(function(){
+               if(motherBoard.controlUnit.running){
+                    $('#ctrlClockStart').css({'display':'none'});
+                    $('#ctrlClockStop').css({'display':''});
+               }else{
+                    $('#ctrlClockStop').css({'display':'none'});
+                    $('#ctrlClockStart').css({'display':''});
+               }
+           },100);
+        </script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-42927176-1', 'maxfs.com');ga('send', 'pageview');
         </script>

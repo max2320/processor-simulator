@@ -39,6 +39,7 @@ $(function(){
 addDevice({
 	"pointer":"Display",
 	"showName":"Display", 
+	"dialogSize":"lg",
 	ui:function (store,selector){
 		var container=$('<div>');
         var dataLine = $('<div>').css({'text-align':'center','font-size':30}).addClass('row');
@@ -57,11 +58,17 @@ addDevice({
 });
 addDevice({
 	"pointer":"Teclado Numérico",
-	"showName":"Teclado Numérico", 
+	"showName":"Teclado Numérico",  
+	"dialogSize":"sm",
 	ui:function (store,selector){
 		store.write("");
 		function addNumber(n){
 			var str = store.read()+""+n;
+			
+			if(parseInt(str)>255){
+				str="255";
+			}
+
 			store.write(parseInt(str));
 			dataField.html(str);
 		}  
@@ -75,23 +82,31 @@ addDevice({
 		}
 		var container=$('<div>');
 
-		var dataLine = $('<div>').css({'text-align':'center','font-size':30}).addClass('row');
+		var dataLine = $('<div>').css({
+			'text-align': 'center',
+			'font-size': 30,
+			'border': '1px solid #6f6f6f',
+			'border-radius': 5
+		}).addClass('row');
 		container.append(dataLine);
 
-		var dataField = $('<div>').addClass('col-sm-10');
+		var dataField = $('<div>').addClass('col-sm-9');
 		var backspaceButton = $('<div>').addClass('col-sm-2');
 		var backspaceButtonBtn = $('<button>').append('<<<').click(removeNumber);
 		backspaceButton.append(backspaceButtonBtn);
 		dataLine.append(dataField);
 		dataLine.append(backspaceButton);
-		var keypad = $('<div>').addClass('row');
+		var keypad = $('<div>').addClass('row').css({'text-align':'center'});
 		container.append(keypad);
 
 		for(var i = 0 ; i < 10 ; i++){
-			var btn=$('<div>').addClass('col-sm-2 col-md-2 col-lg-2').append($('<button>').attr({val:i}).html(i).click(function(){
+			var btn=$('<button>').attr({val:i}).html(i).click(function(){
 				addNumber($(this).attr('val'));
-			}));
-			keypad.append(btn)
+			})
+			keypad.append(btn);
+			if((i + 1) % 4 == 0 && i != 0){
+				keypad.append('<br clear="both">');
+			} 
 		}
 
 		container.append(keypad);
