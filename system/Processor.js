@@ -1,3 +1,10 @@
+/**
+* @param config {description:<>,defautl:<>, register:<>, auxRegister:<>, functionalUnities:<>, functions:<>, logic:<>}
+* @param memory Memory() 
+* @param device Device Array()
+* return Precessor 
+*/
+
 window.Processor = function(config,memory,device){
 
 
@@ -25,6 +32,9 @@ window.Processor = function(config,memory,device){
 	this.selector="";
     this.registers;
 };
+/**
+* Generate processor description HTML format
+*/
 Processor.prototype.getDescription=function(){
     var container=$('<div>').addClass('alert alert-info');
 
@@ -42,14 +52,30 @@ Processor.prototype.getDescription=function(){
     });
     return container;
 }
+/**
+* Set DOMElemnt or CSSSeletor for render structure
+* @param selector DOMElement or CSSSelector
+*/
 Processor.prototype.setSelector=function(selector){
-	this.selector = selector;
+    this.selector = selector;
 };
+
+/**
+* Return DOMElement or CSSSelector
+*/
 Processor.prototype.getSelector=function(){
 	return this.selector;
 };
+/**
+* render all structures on selected container
+* @param selector DOMElement or CSSSelector (optional) 
+*/
 Processor.prototype.render=function(selector){
-	this.setSelector(selector);
+    
+    if(selector==undefined){
+	   this.setSelector(selector); 
+    }
+
 	var registers = {};
 	this.registersConf.forEach(function(reg){
 		registers[reg.name]=new Register(reg);
@@ -68,30 +94,49 @@ Processor.prototype.render=function(selector){
 	});
 	this.registers=registers;
 };
+/**
+* return value of program code register(settings on processor cfg)
+*/
 Processor.prototype.getProgramCode = function(){
 	var programCodeRegister = this.registers[this.pointers.programPointer];
     programCodeRegister.select();
     return ""+programCodeRegister.read();
 }
-
+/**
+* return progress pointer of the processor excution cicle 
+*/
 Processor.prototype.isStartFunction=function(){
 	if(this.startfunction==undefined || this.startfunction==true){
 		return true;
 	}
 	return false;
 }
+/**
+* set function pointer for execution 
+* @param name Processor function code
+*/
 Processor.prototype.setFunctionPointer=function(name){
     this.functionPointer=name;
 }
+/**
+* get function pointer for execution 
+*/
 Processor.prototype.getFunctionPointer=function(){
     return this.functionPointer;
 } 
-Processor.prototype.getFunctionIntruction=function(step){
+/**
+* get function for step process
+* @param step index of process step 
+*/
+Processor.prototype.getFunctionInstruction=function(step){
     if(this.functionsList[this.getFunctionPointer()][step]!=undefined){
         return this.functionsList[this.getFunctionPointer()][step];
     }
     return false;
 }
+/**
+* return function for next step process 
+*/
 Processor.prototype.nextStepFunction=function(){
     if(this.getFunctionPointer()==undefined){
         this.setFunctionPointer('init');
@@ -101,7 +146,7 @@ Processor.prototype.nextStepFunction=function(){
     }else{
         this.functionStep++;
     }
-    var step = this.getFunctionIntruction(this.functionStep);
+    var step = this.getFunctionInstruction(this.functionStep);
     if(step){
         return step; 
     }else{
@@ -116,6 +161,10 @@ Processor.prototype.nextStepFunction=function(){
         return this.nextStepFunction();
     }
 }
+/**
+* return register objec by name
+* @param name Register name
+*/
 Processor.prototype.findRegister=function(name){
     if(name.indexOf('.')!=-1){
         var name=name.split('.');
@@ -128,9 +177,17 @@ Processor.prototype.findRegister=function(name){
         return this.registers[name];
     }
 }
+/**
+* stop the proessor process 
+*/
 Processor.prototype.end=function(){
     motherBoard.stopProcessing();
 }
+/**
+* copy data of register for other refister
+* @param form Source register
+* @param to Desitnation register 
+*/
 Processor.prototype.mov=function(from,to){
     console.log(from + ">>" + to);
     var data =0;
@@ -188,6 +245,10 @@ Processor.prototype.mov=function(from,to){
     }
 }
 
+/**
+* decrement +1 for selected register
+* @param reg Register Object()
+*/
 Processor.prototype.sumone=function(reg){
     console.log(reg + "++");
     var reg=this.findRegister(reg);
@@ -195,13 +256,19 @@ Processor.prototype.sumone=function(reg){
     reg.write(reg.read() + 1);
 }
 
+/**
+* increment +1 for selected register
+* @param reg Register Object()
+*/
 Processor.prototype.subone=function(reg){
     console.log(reg + "--");
     var reg=this.findRegister(reg);
     reg.select();
     reg.write(reg.read() - 1);
 }
-
+/**
+* invoke next function on pipeline
+*/
 Processor.prototype.next=function(){
     var action=this.nextStepFunction().split(' ');
    
