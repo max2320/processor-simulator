@@ -1,3 +1,6 @@
+/**
+*
+*/
 window.Storage = function(label){
     this.label = label;
     this.labelObj = $('<div>').addClass('name').html(label);

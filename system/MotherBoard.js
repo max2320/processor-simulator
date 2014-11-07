@@ -191,7 +191,7 @@ MotherBoard.show = function(value){
             returnValue=parseBin(value);
             break;
     }
-    console.log(window.typeRender+" "+value+"=>"+returnValue);
+    // console.log(window.typeRender+" "+value+"=>"+returnValue);
     return returnValue;
 };
 MotherBoard.prototype.config = function(config){

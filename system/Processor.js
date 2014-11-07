@@ -188,19 +188,44 @@ Processor.prototype.end=function(){
 * @param form Source register
 * @param to Desitnation register 
 */
-Processor.prototype.mov=function(from,to){
+Processor.prototype.lock = function(from,to){
+    console.log("LK::"+from + ">>" + to);
+    var data = 0;
+    switch(from){
+        case 'mem':
+            break;
+        case 'dev':
+            break;
+        default:
+            var regFrom=this.findRegister(from);
+            regFrom.select();
+            data = regFrom.read();  
+    }
+    switch(to){
+        case 'mem':
+            this.memory.selectAddress(data,false);
+            break;
+        case 'dev':
+            // this.device.selectAddress(regFrom.read(),false);
+            break;
+        default:
+            var regTo = this.findRegister(to);
+            regTo.select();
+    }
+}
+Processor.prototype.mov = function(from,to){
     console.log(from + ">>" + to);
     var data =0;
     switch(from){
         case 'mem':
-            this.memory.selectAddress(this.findRegister(this.pointers.memoryPointer).read(),false);
+            this.memory.selectAddress(this.findRegister(this.pointers.memoryPointer).read());
             data = this.memory.read()
             break;
         case 'dev':
             var dev=this.device[this.findRegister(this.pointers.ioPointer).read()];
             var reg=this.findRegister(to);
             reg.select(false);
-            
+                    
             dev.activate(function(value){
                 reg.write(value);
                 return true;

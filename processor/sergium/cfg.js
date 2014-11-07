@@ -174,10 +174,12 @@ addProcessor(
         functions: {
             init: [
                 "mov epi em",
+                "lock em mem",
                 "mov mem dm",
                 "mov dm cod",
                 "sumone epi ",
                 "mov epi em",
+                "lock em mem",
                 "mov mem dm",
                 "mov dm ope",
                 "sumone epi "

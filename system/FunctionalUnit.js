@@ -34,7 +34,9 @@ FunctionalUnit.prototype.render=function(selector){
     this.registers=registers;
 
     this.selector = selector;
+
     $(selector).append(this.regObj);    
+
 };
 FunctionalUnit.prototype.findRegister=function(name){
     if(name.indexOf('.')!=-1){
