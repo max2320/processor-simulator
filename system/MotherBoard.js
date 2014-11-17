@@ -277,8 +277,9 @@ MotherBoard.prototype.configPanel=function(){
             'width':"100%"
         });
         var opt=['hexa','binary','decimal'];
+        var optLable={'hexa':"Hexadecimal",'binary':"Binário",'decimal':"Decimal"};
         opt.forEach(function(e){
-            var dataRenderOpt=$('<option>').attr('value',e).html(e);
+            var dataRenderOpt=$('<option>').attr('value',e).html(optLable[e]);
             if(e==window.typeRender){
                 dataRenderOpt.prop('selected',true);
             }
@@ -299,11 +300,14 @@ MotherBoard.prototype.configPanel=function(){
     ///EDITOR
         var programArea=$('<div>').addClass('row');
         var programAreaLine=$('<div>').addClass('col-sm-12');
-        var programAreaLabel=$('<label>').html('Program');
+        var programAreaLabel=$('<label>').html('Conteúdo da Memória');
         var memoryProgram = $('<textarea>').val(this.memory.getProgram()).css({
             'width':'100%',
             'height':'200px'
         });
+
+
+        
         programAreaLine.append(programAreaLabel);
         programAreaLine.append(memoryProgram);
         programArea.append(programAreaLine);
@@ -325,13 +329,17 @@ MotherBoard.prototype.configPanel=function(){
         window.typeRender=dataRenderselect.val();
         motherBoard = new MotherBoard({
             'memorySize':memoryInput.val()
-        },processorConfigs,devicesAvailable,memoryProgram.val());
+        },processorConfigs,devicesAvailable,window.code.getValue());
+        window.code=undefined;
         motherBoard.render();
-        
     });
     this.configModalFooter.append(btnSave);
 
 
 
     this.configModal.modal();
+
+    window.code=CodeMirror.fromTextArea(memoryProgram.get(0), {
+      lineNumbers: true,
+    });
 }

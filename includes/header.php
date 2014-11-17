@@ -6,11 +6,13 @@
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/codemirror.css" rel="stylesheet">
 
         <script src="Scripts/jquery.js"></script>
         <script src="Scripts/jquery-ui.js"></script>
         <script src="Scripts/bootstrap.js"></script>
         <script src="Scripts/nanoscroller.js"></script>
+        <script src="Scripts/codemirror.js"></script>
 
         <script>
             $(document).ready(function(){

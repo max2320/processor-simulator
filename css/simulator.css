@@ -84,7 +84,7 @@ h3{
 	border-radius:2px;
 }
 .hightlight{
-	box-shadow: 0px 0px 10px #1BFF26;
+	box-shadow: 0px 0px 10px #1BFF26 !important;
 	border:#1BFF26 1px solid;
 }
 .computer-element{

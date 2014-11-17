@@ -55,6 +55,11 @@ Memory.prototype.render = function(selector) {
 };
 Memory.prototype.selectAddress = function(address,hide){
     // console.log(this.UIArray[address]);
+    if(this.UIArray[address] == undefined){
+        motherBoard.stopProcessing();
+        alert("ERRO : Endereço não encontrado!");
+        return false;
+    }
     $(this.UIArray[address]).highlight(hide);
     this.selectedAddress=address;
 };

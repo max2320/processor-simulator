@@ -129,6 +129,10 @@ Processor.prototype.getFunctionPointer=function(){
 * @param step index of process step 
 */
 Processor.prototype.getFunctionInstruction=function(step){
+    if(this.functionsList[this.getFunctionPointer()]==undefined){
+        motherBoard.stopProcessing();
+        alert("ERRO : Função não encontrada!");   
+    }
     if(this.functionsList[this.getFunctionPointer()][step]!=undefined){
         return this.functionsList[this.getFunctionPointer()][step];
     }
@@ -203,7 +207,9 @@ Processor.prototype.lock = function(from,to){
     }
     switch(to){
         case 'mem':
-            this.memory.selectAddress(data,false);
+            if(! this.memory.selectAddress(data,false)){
+                return false;
+            }
             break;
         case 'dev':
             // this.device.selectAddress(regFrom.read(),false);
@@ -222,6 +228,11 @@ Processor.prototype.mov = function(from,to){
             data = this.memory.read()
             break;
         case 'dev':
+            if(this.device[this.findRegister(this.pointers.ioPointer).read()] == undefined){
+                motherBoard.stopProcessing();
+                alert("ERRO : Endereço não encontrado!");
+                return false;
+            }
             var dev=this.device[this.findRegister(this.pointers.ioPointer).read()];
             var reg=this.findRegister(to);
             reg.select(false);
@@ -249,6 +260,11 @@ Processor.prototype.mov = function(from,to){
             this.memory.write(data);
             break;
         case 'dev':
+            if(this.device[this.findRegister(this.pointers.ioPointer).read()] == undefined){
+                motherBoard.stopProcessing();
+                alert("ERRO : Endereço não encontrado!");
+                return false;
+            }
             var dev=this.device[this.findRegister(this.pointers.ioPointer).read()];
             dev.write(data);
             
@@ -263,7 +279,9 @@ Processor.prototype.mov = function(from,to){
             }else{
                 var regPointer=this.findRegister(regTo.pointer);
                 regPointer.select(false);
-                regTo.selectAddress(regPointer.read(),false);
+                if(!regTo.selectAddress(regPointer.read(),false)){
+                    return false;
+                }
             }
             regTo.write(data);
             break;

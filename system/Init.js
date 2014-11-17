@@ -3,8 +3,11 @@ function addProcessor(config){
     processorConfigs.push(config);
 }
 var devicesAvailable=[];
+var devicesIndex=0
 function addDevice(config){
+	config.showName = devicesIndex + " : " + config.showName
 	devicesAvailable.push(config)
+	devicesIndex++;
 }
 
 var scripts=[
@@ -46,7 +49,7 @@ addDevice({
 
 		container.append(dataLine);
 
-		var dataField = $('<div>').addClass('col-sm-10').html(store.read());
+		var dataField = $('<div>').addClass('col-sm-10').html(MotherBoard.show(store.read()));
 		dataLine.append(dataField);
 
 		$(selector).append(container);

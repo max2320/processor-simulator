@@ -62,6 +62,11 @@ AuxRegister.prototype.render= function(selector){
     this.auxRegisterObj = auxRegisterObj;
 }
 AuxRegister.prototype.selectAddress = function(address,hide){
+    if(this.UIArray[address] == undefined){
+        motherBoard.stopProcessing();
+        alert("ERRO : Endereço não encontrado!");
+        return false;
+    }
     $(this.UIArray[address]).highlight(hide);
     this.selectedAddress=address;
 };
