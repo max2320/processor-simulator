@@ -63,6 +63,7 @@ window.parseHexa=function(value){
 
 
 window.typeRender="hexa"; //hexa, binary
+window.maxRegisterValue=0; //hexa, binary
 window.MotherBoard = function(config,processorConfigs,devicesConfig,program) {
 
     this.start={
@@ -71,7 +72,7 @@ window.MotherBoard = function(config,processorConfigs,devicesConfig,program) {
         'devicesConfig':devicesConfig,
         'program':program
     }
-
+    window.maxRegisterValue=processorConfigs[0].memory.size
     this.processorRender='[processorarea]';
     this.memoryRender='[memoryarea]';
     this.deviceRender='[devicearea]';

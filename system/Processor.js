@@ -279,9 +279,7 @@ Processor.prototype.mov = function(from,to){
             }else{
                 var regPointer=this.findRegister(regTo.pointer);
                 regPointer.select(false);
-                if(!regTo.selectAddress(regPointer.read(),false)){
-                    return false;
-                }
+                regTo.selectAddress(regPointer.read(),false);
             }
             regTo.write(data);
             break;

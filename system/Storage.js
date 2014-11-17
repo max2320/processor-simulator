@@ -20,6 +20,11 @@ Storage.prototype.read=function(){
     return this.value;
 }
 Storage.prototype.write=function(value){
+    if(window.maxRegisterValue<value){
+        motherBoard.stopProcessing();
+        alert("ERRO : Overflow!");
+        return false;
+    }
     this.value=value;
     this.refresh();
 }
