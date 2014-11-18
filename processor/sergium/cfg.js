@@ -312,7 +312,6 @@ addProcessor(
                     var cVal=aValue-bValue;
 
                     c.select(false);
-                    c.write(cVal);
 
                     if(cVal==0){
                         z.select(false);
@@ -328,6 +327,10 @@ addProcessor(
                         p.select(false);
                         p.write(0);   
                     }
+                    if(cVal<0){
+                        cVal*=-1;
+                    }
+                    c.write(cVal);
 
                 }
             },{
