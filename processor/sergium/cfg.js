@@ -71,6 +71,7 @@ addProcessor(
                             'top': '80px',
                             'left': '160px'
                         },
+                        'size':1,
                         'bus': ''
                     }, {
                         'name': 'p',
@@ -81,6 +82,7 @@ addProcessor(
                             'top': '120px',
                             'left': '160px'
                         },
+                        'size':1,
                         'bus': ''
                     }]
             }
@@ -107,8 +109,6 @@ addProcessor(
         }, {
             'name': 'cod',
             'showName': 'COD',
-            'size': 255,
-            'arr': 0,
             'css': {
                 'left': 140,
                 'top': 160

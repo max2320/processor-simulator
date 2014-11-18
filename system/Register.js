@@ -14,10 +14,14 @@ window.Register = function(config) {
         'el': config.name,
         'l': config.css.left,
         'bus': config.bus,
+
+    }
+    if(config.size!=undefined){
+        this.attributes['size']=config.size
     }
     this.name = config.showName
     this.css = config.css
-    this.store=new Storage(this.name);
+    this.store=new Storage(this.name,config.size);
     return this;
 }
 Register.prototype.render= function(selector){

@@ -179,7 +179,7 @@ MotherBoard.prototype.render=function(){
         e.render(deviceRender);
     });
 };
-MotherBoard.show = function(value){
+MotherBoard.show = function(value,size){
     var returnValue="0";
     switch(window.typeRender){
         case 'decimal':
@@ -189,7 +189,7 @@ MotherBoard.show = function(value){
             returnValue=parseHexa(value);
             break;
         case 'binary':
-            returnValue=parseBin(value);
+            returnValue=parseBin(value,size);
             break;
     }
     // console.log(window.typeRender+" "+value+"=>"+returnValue);
