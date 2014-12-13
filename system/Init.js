@@ -40,26 +40,6 @@ $(function(){
 })
 
 addDevice({
-	"pointer":"Display",
-	"showName":"Display", 
-	"dialogSize":"lg",
-	ui:function (store,selector){
-		var container=$('<div>');
-        var dataLine = $('<div>').css({'text-align':'center','font-size':30}).addClass('row');
-
-		container.append(dataLine);
-
-		var dataField = $('<div>').addClass('col-sm-10').html(MotherBoard.show(store.read()));
-		dataLine.append(dataField);
-
-		$(selector).append(container);
-
-	},
-	callback:function(){
-		return true;
-	},
-});
-addDevice({
 	"pointer":"Teclado Numérico",
 	"showName":"Teclado Numérico",  
 	"dialogSize":"sm",
@@ -119,4 +99,44 @@ addDevice({
 	callback:function(){
 		return true;
 	},
-})
+});
+addDevice({
+	"pointer":"Display",
+	"showName":"Display", 
+	"dialogSize":"lg",
+	ui:function (store,selector){
+		var container=$('<div>');
+        var dataLine = $('<div>').css({'text-align':'center','font-size':30}).addClass('row');
+
+		container.append(dataLine);
+
+		var dataField = $('<div>').addClass('col-sm-10').html(MotherBoard.show(store.read()));
+		dataLine.append(dataField);
+
+		$(selector).append(container);
+
+	},
+	callback:function(){
+		return true;
+	},
+});
+addDevice({
+	"pointer":"Impressora",
+	"showName":"Impressora", 
+	"dialogSize":"lg",
+	ui:function (store,selector){
+		var container=$('<div>');
+        var dataLine = $('<div>').css({'text-align':'center','font-size':30}).addClass('row');
+
+		container.append(dataLine);
+
+		var dataField = $('<div>').addClass('col-sm-10').html(MotherBoard.show(store.read()));
+		dataLine.append(dataField);
+
+		$(selector).append(container);
+
+	},
+	callback:function(){
+		return true;
+	},
+});

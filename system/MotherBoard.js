@@ -342,5 +342,6 @@ MotherBoard.prototype.configPanel=function(){
 
     window.code=CodeMirror.fromTextArea(memoryProgram.get(0), {
       lineNumbers: true,
+      firstLineNumber:0
     });
 }

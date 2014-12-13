@@ -5,7 +5,7 @@ window.Storage = function(label,size){
     this.label = label;
     this.labelObj = $('<div>').addClass('name').html(label);
     this.value = 0;
-    this.allowSize=size!=undefined;
+    this.allowSize=size!=undefined ;
     this.size = size
 
     if(this.allowSize){
@@ -30,10 +30,16 @@ Storage.prototype.read=function(){
     return parseInt(this.value);
 }
 Storage.prototype.write=function(value){
-    if(window.maxRegisterValue<value){
+    if(this.allowsize && this.size > value){
         motherBoard.stopProcessing();
         alert("ERRO : Overflow!");
         return false;
+    }else{
+        if(window.maxRegisterValue<value){
+            motherBoard.stopProcessing();
+            alert("ERRO : Overflow!");
+            return false;
+        }
     }
     if(value==undefined || value==""){
         value=0;
