@@ -13,9 +13,8 @@ window.Register = function(config) {
     this.attributes = {
         'el': config.name,
         'l': config.css.left,
-        'bus': config.bus,
-
     }
+    this.bus = config.bus
     if(config.size!=undefined){
         this.attributes['size']=config.size
     }
@@ -26,8 +25,8 @@ window.Register = function(config) {
 }
 Register.prototype.render= function(selector){
     this.regObj = $('<div>').attr(this.attributes).addClass('registrador draggable').css(this.css);
-    this.store.render(this.regObj);
-    
+    this.store.render(this.regObj);    
+
     this.selector = selector;
     $(selector).append(this.regObj);
 }

@@ -64,6 +64,7 @@ window.parseHexa=function(value){
 
 window.typeRender="hexa"; //hexa, binary
 window.maxRegisterValue=0; //hexa, binary
+window.bus={};
 window.MotherBoard = function(config,processorConfigs,devicesConfig,program) {
 
     this.start={
@@ -178,6 +179,7 @@ MotherBoard.prototype.render=function(){
     this.devices.forEach(function(e){
         e.render(deviceRender);
     });
+
 };
 MotherBoard.show = function(value,size){
     var returnValue="0";
@@ -337,7 +339,7 @@ MotherBoard.prototype.configPanel=function(){
     this.configModalFooter.append(btnSave);
 
 
-
+    this.stopProcessing();
     this.configModal.modal();
 
     window.code=CodeMirror.fromTextArea(memoryProgram.get(0), {

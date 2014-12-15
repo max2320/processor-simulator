@@ -30,7 +30,7 @@ Storage.prototype.read=function(){
     return parseInt(this.value);
 }
 Storage.prototype.write=function(value){
-    if(this.allowsize && this.size > value){
+    if(this.allowsize && this.size >= value){
         motherBoard.stopProcessing();
         alert("ERRO : Overflow!");
         return false;

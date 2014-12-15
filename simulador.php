@@ -21,8 +21,8 @@
                 </div>
                 <div class="col-xs-6 col-sm-6">
                     <div class="content-computer-area">
-                        <div id="processador" class="computer-element">
-                            <canvas id="fullcanvas" height="395" width="442"></canvas>
+                        <div id="processador" class="computer-element" style="height:450px;">
+                            <svg id="bus_draw" style="width: 100%; height: 100%;"></svg>
                             <div processorarea='processorarea'>
                                 <div id="aux_periferico_area"></div>
                                 <div id="aux_memoria_area"></div>
@@ -36,7 +36,8 @@
                             <button title="Pause" type="button" id="ctrlClockStop" style="display:none;"><i class="fa fa-pause"></i></button>
                             <button title="Reset" type="button" id="ctrlClockReset"><i class="fa fa-refresh"></i></button>
                             <!-- <button title="" type="button" onclick="editor_assembly();" title="editor"><\></button> -->
-                            <button title="Painel de Configuração" type="button" id="configPanel" title="Painel de configuração"><i class="fa fa-cog"></i></button>
+                            <button type="button" id="configPanel" title="Painel de configuração"><i class="fa fa-cog"></i></button>
+                            <button type="button" id="description" title="Descritivo"><i class="fa fa-file-text-o"></i></button>
                         </div>
                     </div>
                 </div>
@@ -94,6 +95,34 @@
             });
             $('#configPanel').click(function(){
                 motherBoard.configPanel();
+            });
+            $('#description').click(function(){
+                var modal = $('<div>').addClass('modal fade');
+                var modalDialog = $('<div>').addClass('modal-dialog modal-md');
+                modal.append(modalDialog);
+
+                var modalContent = $('<div>').addClass('modal-content');
+                modalDialog.append(modalContent);
+
+                var modalHeader = $('<div>').addClass('modal-header');
+                modalContent.append(modalHeader);
+                var title=$('<h4>').html("Descrição");
+                modalHeader.append($('<button>').attr({type:"button",'data-dismiss':"modal"}).addClass("close").append($('<i>').addClass('fa fa-times')));
+                modalHeader.append(title);
+
+                var headerLabel = $('<h4>').addClass('modal-title');
+                modalHeader.append(headerLabel);
+
+                var modalBody = $('<div>').addClass('modal-body');
+                modalContent.append(modalBody);
+
+                motherBoard.processors.forEach(function(processor){
+                    modalBody.append(processor.getDescription());
+                })
+
+                modalFooter = $('<div>').addClass('modal-footer');
+                modalContent.append(modalFooter);
+                modal.modal()
             });
             setInterval(function(){
                if(motherBoard.controlUnit.running){

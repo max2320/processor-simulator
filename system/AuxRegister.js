@@ -19,6 +19,9 @@ window.AuxRegister = function(config) {
         'pointer': config.pointer,
         'size': size,
     }
+
+    this.bus = config.bus
+    
     this.pointer= config.pointer;
     this.size= size;
     this.name = config.showName

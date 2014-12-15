@@ -20,6 +20,7 @@ var scripts=[
 	"system/AuxRegister.js",
 	"system/Processor.js",
 	"system/Devices.js",
+	"system/Svg.js",
 ];
 var motherBoard;
 

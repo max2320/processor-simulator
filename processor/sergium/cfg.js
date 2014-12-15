@@ -27,63 +27,63 @@ addProcessor(
                 'showName': 'ULA',
                 'css': {
                     'background-image': 'url("images/ula.png")',
-                    'width': '200px',
-                    'height': '165px',
-                    'top': '220px',
-                    'left': '235px'
+                    'width': 200,
+                    'height': 165,
+                    'top': 220,
+                    'left': 235
                 },
                 'registers': [{
                         'name': 'a',
                         'showName': 'A',
                         'css': {
-                            'width': '40px',
-                            'height': '40px',
-                            'top': '20px',
-                            'left': '20px'
+                            'width': 40,
+                            'height': 40,
+                            'top': 20,
+                            'left': 20
                         },
-                        'bus': ''
+                        'bus': []
                     }, {
                         'name': 'b',
                         'showName': 'B',
                         'css': {
-                            'width': '40px',
-                            'height': '40px',
-                            'top': '20px',
-                            'left': '140px'
+                            'width': 40,
+                            'height': 40,
+                            'top': 20,
+                            'left': 140
                         },
-                        'bus': ''
+                        'bus': []
                     }, {
                         'name': 'c',
                         'showName': 'C',
                         'css': {
-                            'width': '40px',
-                            'height': '40px',
-                            'top': '110px',
-                            'left': '80px'
+                            'width': 40,
+                            'height': 40,
+                            'top': 110,
+                            'left': 80
                         },
-                        'bus': 'ac'
+                        'bus': ['ac']
                     }, {
                         'name': 'z',
                         'showName': 'Z',
                         'css': {
-                            'width': '30px',
-                            'height': '30px',
-                            'top': '80px',
-                            'left': '160px'
+                            'width': 30,
+                            'height': 30,
+                            'top': 80,
+                            'left': 160
                         },
                         'size':1,
-                        'bus': ''
+                        'bus': []
                     }, {
                         'name': 'p',
                         'showName': 'P',
                         'css': {
-                            'width': '30px',
-                            'height': '30px',
-                            'top': '120px',
-                            'left': '160px'
+                            'width': 30,
+                            'height': 30,
+                            'top': 120,
+                            'left': 160
                         },
                         'size':1,
-                        'bus': ''
+                        'bus': []
                     }]
             }
         ],
@@ -96,7 +96,7 @@ addProcessor(
                     'left': 20,
                     'top': 285
                 },
-                'bus': 'b,ac'
+                'bus': ['ula.b','ac']
         }],
         registers: [{
             'name': 'epi',
@@ -105,7 +105,7 @@ addProcessor(
                 'left': 150,
                 'top': 10
             },
-            'bus': 'em'
+            'bus': ['em']
         }, {
             'name': 'cod',
             'showName': 'COD',
@@ -113,7 +113,7 @@ addProcessor(
                 'left': 140,
                 'top': 160
                 },
-                'bus': ''
+                'bus':[]
         },{
             'name': 'ope',
             'showName': 'OPE',
@@ -121,7 +121,7 @@ addProcessor(
                 'left': 220,
                 'top': 80
             },
-            'bus': 'dm,em,b,eaux,ac,ees,epi'
+            'bus': ['dm','em','ula.b','eaux','ac','ees','epi']
         },{
             'name': 'ac',
             'showName': 'AC',
@@ -129,7 +129,7 @@ addProcessor(
                 'left': 150,
                 'top': 250
             },
-            'bus': 'dm,aux,a,des'
+            'bus': ['dm','aux','ula.a','des']
         },{
             'name': 'eaux',
             'showName': 'EAUX',
@@ -137,7 +137,7 @@ addProcessor(
                 'left': 20,
                 'top': 230
             },
-            'bus': 'aux'
+            'bus': ['aux']
         },{
             'name': 'em',
             'showName': 'EM',
@@ -145,7 +145,7 @@ addProcessor(
                 'left': 30,
                 'top': 10
             },
-            'bus': 'mem'
+            'bus': ['mem']
         },{
             'name': 'dm',
             'showName': 'DM',
@@ -153,7 +153,7 @@ addProcessor(
                 'left': 30,
                 'top': 65
             },
-            'bus': 'mem,cod,ac,ope'
+            'bus': ['mem','cod','ac','ope']
         },{
             'name': 'ees',
             'showName': 'E E/S',
@@ -161,7 +161,7 @@ addProcessor(
                 'left': 370,
                 'top': 10
             },
-            'bus': 'per'
+            'bus': ['dev']
         },{
             'name': 'des',
             'showName': 'D E/S',
@@ -169,7 +169,7 @@ addProcessor(
                 'left': 370,
                 'top': 65
             },
-            'bus': 'per,ac'
+            'bus': ['dev','ac']
         }],
         functions: {
             init: [
@@ -196,10 +196,12 @@ addProcessor(
             ],
             2: [
                 "mov ope eaux",
+                "lock eaux aux",
                 "mov aux ac"
             ],
             3: [
                 "mov ope eaux",
+                "lock eaux aux",
                 "mov ac aux"
             ],
             4: [
@@ -218,6 +220,7 @@ addProcessor(
             10: [
                 "mov ac ula.a",
                 "mov ope eaux",
+                "lock eaux aux",
                 "mov aux ula.b",
                 "SUM",
                 "mov ula.c ac"
@@ -225,6 +228,7 @@ addProcessor(
             11: [
                 "mov ac ula.a",
                 "mov ope eaux",
+                "lock eaux aux",
                 "mov aux ula.b",
                 "SUB",
                 "mov ula.c ac"

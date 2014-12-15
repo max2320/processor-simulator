@@ -93,6 +93,74 @@ Processor.prototype.render=function(selector){
 		
 	});
 	this.registers=registers;
+
+    var processor=this;
+    var regKeys=Object.keys(registers);
+    
+    regKeys.forEach(function(from){
+
+        var reg = processor.findRegister(from);
+        var x1=reg.css.left;
+        var y1=reg.css.top;
+    
+        if(reg.bus != undefined){
+            reg.bus.forEach(function(dest){
+                
+                var cod=from.split('.').join('_') + "_" + dest.split('.').join('_');
+                
+                if(dest == 'mem'){
+                    window.bus[cod] = new Svg(cod,x1,y1,x1-1000,y1);
+                }else{
+                    if(dest=='dev'){
+                        window.bus[cod] = new Svg(cod,x1,y1,x1+1000,y1);
+                    }else{
+                        if(dest.indexOf('.')!=-1){
+                            var destSplited = dest.split('.');
+                            var funcUnit = processor.findRegister(destSplited[0]);
+                            var to = processor.findRegister(dest)
+                            window.bus[cod] = new Svg(cod,x1,y1,to.css.left + funcUnit.css.left, to.css.top + funcUnit.css.top);
+                        }else{
+                            var to = processor.findRegister(dest)
+                            window.bus[cod] = new Svg(cod,x1,y1,to.css.left,to.css.top);
+                        }
+                    }
+                }
+            });
+        }else{
+            if(reg.registers!=undefined){
+                var subRegisters=Object.keys(reg.registers);
+                subRegisters.forEach(function(el){
+                    var subreg = processor.findRegister(from+"."+el);
+                    var subx1=subreg.css.left+x1;
+                    var suby1=subreg.css.top+y1;
+                
+                    if(subreg.bus != undefined){
+                        subreg.bus.forEach(function(dest){
+                            var cod=from.split('.').join('_') + "_" +el+ "_" + dest.split('.').join('_');
+                            
+                            if(dest == 'mem'){
+                                window.bus[cod] = new Svg(cod,subx1,suby1,subx1-1000,suby1);
+                            }else{
+                                if(dest=='dev'){
+                                    window.bus[cod] = new Svg(cod,subx1,suby1,subx1+1000,suby1);
+                                }else{
+                                    if(dest.indexOf('.')!=-1){
+                                        var destSplited = dest.split('.');
+                                        var funcUnit = processor.findRegister(destSplited[0]);
+                                        var to = processor.findRegister(dest)
+                                        window.bus[cod] = new Svg(cod,subx1,suby1,to.css.left + funcUnit.css.left, to.css.top + funcUnit.css.top);
+                                    }else{
+                                        var to = processor.findRegister(dest)
+                                        window.bus[cod] = new Svg(cod,subx1,suby1,to.css.left,to.css.top);
+                                    }
+                                }
+                            }
+                        });
+                    }   
+                })
+            }
+        }
+    });
 };
 /**
 * return value of program code register(settings on processor cfg)
@@ -185,6 +253,7 @@ Processor.prototype.findRegister=function(name){
 * stop the proessor process 
 */
 Processor.prototype.end=function(){
+    $('#bus_draw line').css('stroke','#FFE736')
     motherBoard.stopProcessing();
 }
 /**
@@ -193,6 +262,14 @@ Processor.prototype.end=function(){
 * @param to Desitnation register 
 */
 Processor.prototype.lock = function(from,to){
+    if(from == 'dev' || from == 'mem'){
+        var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+    }else{
+        var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+    }
+    console.log("BUS:"+cod)
+    window.bus[cod].enable();
+
     console.log("LK::"+from + ">>" + to);
     var data = 0;
     switch(from){
@@ -216,10 +293,25 @@ Processor.prototype.lock = function(from,to){
             break;
         default:
             var regTo = this.findRegister(to);
-            regTo.select();
+            if(regTo.pointer==undefined){
+                regTo.select(false);
+            }else{
+                var regPointer=this.findRegister(regTo.pointer);
+                regPointer.select(false);
+                regTo.selectAddress(regPointer.read(),false);
+            }
     }
 }
 Processor.prototype.mov = function(from,to){
+
+    if(from == 'dev' || from == 'mem'){
+        var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+    }else{
+        var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+    }
+    console.log("BUS:"+cod)
+    window.bus[cod].enable();
+
     console.log(from + ">>" + to);
     var data =0;
     switch(from){
@@ -291,6 +383,7 @@ Processor.prototype.mov = function(from,to){
 * @param reg Register Object()
 */
 Processor.prototype.sumone=function(reg){
+    $('#bus_draw line').css('stroke','#FFE736')
     console.log(reg + "++");
     var reg=this.findRegister(reg);
     reg.select();
@@ -302,6 +395,8 @@ Processor.prototype.sumone=function(reg){
 * @param reg Register Object()
 */
 Processor.prototype.subone=function(reg){
+
+    $('#bus_draw line').css('stroke','#FFE736')
     console.log(reg + "--");
     var reg=this.findRegister(reg);
     reg.select();

@@ -5,6 +5,8 @@ window.FunctionalUnit = function(config){
         'bus': config.bus,
         'size': config.size,
     }
+    
+    this.bus = config.bus
     this.name = config.showName
     
     this.css=config.css;
