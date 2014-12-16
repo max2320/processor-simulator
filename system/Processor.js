@@ -105,23 +105,27 @@ Processor.prototype.render=function(selector){
     
         if(reg.bus != undefined){
             reg.bus.forEach(function(dest){
-                
-                var cod=from.split('.').join('_') + "_" + dest.split('.').join('_');
-                
-                if(dest == 'mem'){
-                    window.bus[cod] = new Svg(cod,x1,y1,x1-1000,y1);
+                if(from<dest){
+                    var cod=from.split('.').join('_') + "_" + dest.split('.').join('_');
                 }else{
-                    if(dest=='dev'){
-                        window.bus[cod] = new Svg(cod,x1,y1,x1+1000,y1);
+                    var cod=dest.split('.').join('_') + "_" + from.split('.').join('_');
+                }
+                if(window.bus[cod] == undefined){
+                    if(dest == 'mem'){
+                        window.bus[cod] = new Svg(cod,x1,y1,x1-1000,y1);
                     }else{
-                        if(dest.indexOf('.')!=-1){
-                            var destSplited = dest.split('.');
-                            var funcUnit = processor.findRegister(destSplited[0]);
-                            var to = processor.findRegister(dest)
-                            window.bus[cod] = new Svg(cod,x1,y1,to.css.left + funcUnit.css.left, to.css.top + funcUnit.css.top);
+                        if(dest=='dev'){
+                            window.bus[cod] = new Svg(cod,x1,y1,x1+1000,y1);
                         }else{
-                            var to = processor.findRegister(dest)
-                            window.bus[cod] = new Svg(cod,x1,y1,to.css.left,to.css.top);
+                            if(dest.indexOf('.')!=-1){
+                                var destSplited = dest.split('.');
+                                var funcUnit = processor.findRegister(destSplited[0]);
+                                var to = processor.findRegister(dest)
+                                window.bus[cod] = new Svg(cod,x1,y1,to.css.left + funcUnit.css.left, to.css.top + funcUnit.css.top);
+                            }else{
+                                var to = processor.findRegister(dest)
+                                window.bus[cod] = new Svg(cod,x1,y1,to.css.left,to.css.top);
+                            }
                         }
                     }
                 }
@@ -136,22 +140,27 @@ Processor.prototype.render=function(selector){
                 
                     if(subreg.bus != undefined){
                         subreg.bus.forEach(function(dest){
-                            var cod=from.split('.').join('_') + "_" +el+ "_" + dest.split('.').join('_');
-                            
-                            if(dest == 'mem'){
-                                window.bus[cod] = new Svg(cod,subx1,suby1,subx1-1000,suby1);
+                            if(from<dest){
+                                var cod=from.split('.').join('_') + "_" +el+ "_" + dest.split('.').join('_');
                             }else{
-                                if(dest=='dev'){
-                                    window.bus[cod] = new Svg(cod,subx1,suby1,subx1+1000,suby1);
+                                var cod=det.split('.').join('_') + "_" +el+ "_" + from.split('.').join('_');
+                            }
+                            if(window.bus[cod] == undefined){
+                                if(dest == 'mem'){
+                                    window.bus[cod] = new Svg(cod,subx1,suby1,subx1-1000,suby1);
                                 }else{
-                                    if(dest.indexOf('.')!=-1){
-                                        var destSplited = dest.split('.');
-                                        var funcUnit = processor.findRegister(destSplited[0]);
-                                        var to = processor.findRegister(dest)
-                                        window.bus[cod] = new Svg(cod,subx1,suby1,to.css.left + funcUnit.css.left, to.css.top + funcUnit.css.top);
+                                    if(dest=='dev'){
+                                        window.bus[cod] = new Svg(cod,subx1,suby1,subx1+1000,suby1);
                                     }else{
-                                        var to = processor.findRegister(dest)
-                                        window.bus[cod] = new Svg(cod,subx1,suby1,to.css.left,to.css.top);
+                                        if(dest.indexOf('.')!=-1){
+                                            var destSplited = dest.split('.');
+                                            var funcUnit = processor.findRegister(destSplited[0]);
+                                            var to = processor.findRegister(dest)
+                                            window.bus[cod] = new Svg(cod,subx1,suby1,to.css.left + funcUnit.css.left, to.css.top + funcUnit.css.top);
+                                        }else{
+                                            var to = processor.findRegister(dest)
+                                            window.bus[cod] = new Svg(cod,subx1,suby1,to.css.left,to.css.top);
+                                        }
                                     }
                                 }
                             }
@@ -263,9 +272,17 @@ Processor.prototype.end=function(){
 */
 Processor.prototype.lock = function(from,to){
     if(from == 'dev' || from == 'mem'){
-        var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+        if(to<from){
+            var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+        }else{
+            var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+        }
     }else{
-        var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+        if(to<from){
+            var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+        }else{
+            var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+        }
     }
     console.log("BUS:"+cod)
     window.bus[cod].enable();
@@ -305,9 +322,17 @@ Processor.prototype.lock = function(from,to){
 Processor.prototype.mov = function(from,to){
 
     if(from == 'dev' || from == 'mem'){
-        var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+        if(to<from){
+            var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+        }else{
+            var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+        }
     }else{
-        var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+        if(to<from){
+            var cod=to.split('.').join('_') + "_" + from.split('.').join('_');
+        }else{
+            var cod=from.split('.').join('_') + "_" + to.split('.').join('_');
+        }
     }
     console.log("BUS:"+cod)
     window.bus[cod].enable();
