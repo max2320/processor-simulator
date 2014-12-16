@@ -118,3 +118,11 @@ h3{
 	display:block;
 	float:left;
 }
+
+.processor-desc{
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	width: 250px;
+	height: 90px;
+}

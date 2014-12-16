@@ -27,6 +27,7 @@
                                 <div id="aux_periferico_area"></div>
                                 <div id="aux_memoria_area"></div>
                             </div>
+                            <div id="processor_desc" class="processor-desc"></div>
                         </div>
                         <div id="controlUnitArea" class="computer-element">
                             <button title="Reduz Delay" type="button" id="ctrlClockMinus"><i class="fa fa-minus"></i></button>
@@ -37,7 +38,7 @@
                             <button title="Reset" type="button" id="ctrlClockReset"><i class="fa fa-refresh"></i></button>
                             <!-- <button title="" type="button" onclick="editor_assembly();" title="editor"><\></button> -->
                             <button type="button" id="configPanel" title="Painel de configuração"><i class="fa fa-cog"></i></button>
-                            <button type="button" id="description" title="Descritivo"><i class="fa fa-file-text-o"></i></button>
+                            <!-- <button type="button" id="description" title="Descritivo"><i class="fa fa-file-text-o"></i></button> -->
                         </div>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
             </div>
         </div>
         <script>
-        $('#controlUnitArea [title]').tooltip();
+            $('#controlUnitArea [title]').tooltip();
             var defaultCicleTime=1000;
             $('#ctrlClockMinus').click(function(){
                 var time=defaultCicleTime-100;
@@ -96,34 +97,11 @@
             $('#configPanel').click(function(){
                 motherBoard.configPanel();
             });
-            $('#description').click(function(){
-                var modal = $('<div>').addClass('modal fade');
-                var modalDialog = $('<div>').addClass('modal-dialog modal-md');
-                modal.append(modalDialog);
-
-                var modalContent = $('<div>').addClass('modal-content');
-                modalDialog.append(modalContent);
-
-                var modalHeader = $('<div>').addClass('modal-header');
-                modalContent.append(modalHeader);
-                var title=$('<h4>').html("Descrição");
-                modalHeader.append($('<button>').attr({type:"button",'data-dismiss':"modal"}).addClass("close").append($('<i>').addClass('fa fa-times')));
-                modalHeader.append(title);
-
-                var headerLabel = $('<h4>').addClass('modal-title');
-                modalHeader.append(headerLabel);
-
-                var modalBody = $('<div>').addClass('modal-body');
-                modalContent.append(modalBody);
-
+            $(function(){
                 motherBoard.processors.forEach(function(processor){
-                    modalBody.append(processor.getDescription());
-                })
-
-                modalFooter = $('<div>').addClass('modal-footer');
-                modalContent.append(modalFooter);
-                modal.modal()
-            });
+                    $('#processor_desc').append(processor.getDescription())
+                });
+            })
             setInterval(function(){
                if(motherBoard.controlUnit.running){
                     $('#ctrlClockStart').css({'display':'none'});
@@ -132,7 +110,8 @@
                     $('#ctrlClockStop').css({'display':'none'});
                     $('#ctrlClockStart').css({'display':''});
                }
-           },100);
+            },100);
+
         </script>
         <script>
             // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-42927176-1', 'maxfs.com');ga('send', 'pageview');
