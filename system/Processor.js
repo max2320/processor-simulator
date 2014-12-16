@@ -143,7 +143,7 @@ Processor.prototype.render=function(selector){
                             if(from<dest){
                                 var cod=from.split('.').join('_') + "_" +el+ "_" + dest.split('.').join('_');
                             }else{
-                                var cod=det.split('.').join('_') + "_" +el+ "_" + from.split('.').join('_');
+                                var cod=dest.split('.').join('_') + "_" +el+ "_" + from.split('.').join('_');
                             }
                             if(window.bus[cod] == undefined){
                                 if(dest == 'mem'){
