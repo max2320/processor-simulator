@@ -51,6 +51,12 @@ Processor.prototype.getDescription=function(){
         container.append(line);
     });
     return container;
+}/**
+* Get descriprion name
+*/
+Processor.prototype.getDescriptionName=function(){
+    
+    return this.desc.name;
 }
 /**
 * Set DOMElemnt or CSSSeletor for render structure

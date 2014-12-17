@@ -123,6 +123,7 @@ h3{
 	position: absolute;
 	right: 0px;
 	bottom: 0px;
-	width: 250px;
-	height: 90px;
+	color: #fff;
+	font-size: 20px;
+	padding: 10px;
 }

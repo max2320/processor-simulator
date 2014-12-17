@@ -99,7 +99,7 @@
             });
             $(function(){
                 motherBoard.processors.forEach(function(processor){
-                    $('#processor_desc').append(processor.getDescription())
+                    $('#processor_desc').append($('<div>').html(processor.getDescriptionName()))
                 });
             })
             setInterval(function(){

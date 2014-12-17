@@ -5,6 +5,6 @@
     top: <POSIÇÃO VERTICAL>
     left: <POSIÇÃO HORIZONTAL>,
   },
-  size:<TAMANHO DO REGISTRADOR>,
+  [size:<TAMANHO DO REGISTRADOR>,]
   bus: <CONEXÕES>
 }
