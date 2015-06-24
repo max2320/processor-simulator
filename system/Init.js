@@ -20,7 +20,7 @@ var scripts=[
 	"system/AuxRegister.js",
 	"system/Processor.js",
 	"system/Devices.js",
-	"system/Svg.js",
+	"system/Bus.js",
 ];
 var motherBoard;
 
@@ -34,10 +34,14 @@ $(function(){
 		console.log("Class::" + src);
 		$('head').append($('<script>').attr('src',src));
 	});
-	motherBoard=new MotherBoard({
-		'memorySize':100
-	},processorConfigs,devicesAvailable);
-	motherBoard.render();
+	if(typeof window['MotherBoard'] != 'undefined'){
+		motherBoard=new MotherBoard({
+			'memorySize':100
+		},processorConfigs,devicesAvailable);
+		motherBoard.render();
+	}else{
+		console.log('LOAD ERROR')
+	}
 })
 
 addDevice({
