@@ -1,0 +1,27 @@
+{
+  "name": "processor-simulator",
+  "version": "1.0.0",
+  "description": "Didactic tool to simulate internal computer processor behavior.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d system"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/max2320/processor-simulator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/max2320/processor-simulator/issues"
+  },
+  "homepage": "https://github.com/max2320/processor-simulator#readme",
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0"
+  }
+}
