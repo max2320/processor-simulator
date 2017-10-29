@@ -1,12 +1,8 @@
 window.svgContainer = SVG($('#bus_draw').get(0))
 
-
-window.bus_cat={}
-
 window.Bus = function(id,x1,y1,x2,y2){
   this.id = id;
-  var ids = id.split('_')
-
+  var ids = id.split('_');
 
   this.from = ids[0];
   this.to = ids[1];
@@ -16,39 +12,39 @@ window.Bus = function(id,x1,y1,x2,y2){
   var corretorXDest = 20;
   var corretorYDest = 20;
 
-  var xOrigin = x1
-  var xDest = x2
+  var xOrigin = x1;
+  var xDest = x2;
 
   if(xOrigin < xDest){
-    corretorXOrigin = 30
-    corretorXDest = 10
+    corretorXOrigin = 30;
+    corretorXDest = 10;
   }
 
   if(xOrigin > xDest){
-    corretorXOrigin = 10
-    corretorXDest = 30
+    corretorXOrigin = 10;
+    corretorXDest = 30;
   }
 
-  var yOrigin = y1
-  var yDest = y2
+  var yOrigin = y1;
+  var yDest = y2;
 
   if(yOrigin < yDest){
-    corretorYOrigin = 30
-    corretorYDest = 10
+    corretorYOrigin = 30;
+    corretorYDest = 10;
   }
 
   if(yOrigin > yDest){
-    corretorYOrigin = 10
-    corretorYDest = 30
+    corretorYOrigin = 10;
+    corretorYDest = 30;
   }
 
-  xOrigin = x1 + corretorXOrigin
-  xDest = x2 + corretorXDest
+  xOrigin = x1 + corretorXOrigin;
+  xDest = x2 + corretorXDest;
 
-  yOrigin = y1 + corretorYOrigin
-  yDest = y2 + corretorYDest
+  yOrigin = y1 + corretorYOrigin;
+  yDest = y2 + corretorYDest;
 
-  console.log(this.from, this.to, corretorXOrigin, corretorXDest, corretorYOrigin, corretorYDest)
+  console.log(this.from, this.to, corretorXOrigin, corretorXDest, corretorYOrigin, corretorYDest);
 
   var minX = x1;
   var xOperator = +1;
@@ -112,7 +108,6 @@ var BusLine = function(target, x1,y1,x2,y2){
   });
 
   this.lineT;
-
 };
 
 BusLine.prototype.enable = function(){
@@ -124,6 +119,6 @@ BusLine.prototype.enable = function(){
 
 BusLine.prototype.disable = function(){
   if(this.lineT){
-    this.lineT.remove()
+    this.lineT.remove();
   }
 }
