@@ -29,8 +29,8 @@ addProcessor(
                     'background-image': 'url("images/ula.png")',
                     'width': 200,
                     'height': 165,
-                    'top': 220,
-                    'left': 235
+                    'left': 140,
+                    'top': 290
                 },
                 'registers': [{
                         'name': 'a',
@@ -93,8 +93,8 @@ addProcessor(
                 'size': 4,
                 'pointer': 'eaux',
                 'css': {
-                    'left': 20,
-                    'top': 285
+                    'left': 360,
+                    'top': 270
                 },
                 'bus': ['ula.b','ac']
         }],
@@ -110,39 +110,39 @@ addProcessor(
             'name': 'cod',
             'showName': 'COD',
             'css': {
-                'left': 140,
-                'top': 160
+                'left': 55,
+                'top': 60
                 },
                 'bus':[]
         },{
             'name': 'ope',
             'showName': 'OPE',
             'css': {
-                'left': 220,
-                'top': 80
+              'left': 220,
+              'top': 120
             },
             'bus': ['dm','em','ula.b','eaux','ac','ees','epi']
         },{
             'name': 'ac',
             'showName': 'AC',
             'css': {
-                'left': 150,
-                'top': 250
+                'left': 40,
+                'top': 270
             },
             'bus': ['dm','aux','ula.a','des']
         },{
             'name': 'eaux',
             'showName': 'EAUX',
             'css': {
-                'left': 20,
-                'top': 230
+                'left': 360,
+                'top': 200
             },
             'bus': ['aux']
         },{
             'name': 'em',
             'showName': 'EM',
             'css': {
-                'left': 30,
+                'left': 20,
                 'top': 10
             },
             'bus': ['mem']
@@ -150,15 +150,15 @@ addProcessor(
             'name': 'dm',
             'showName': 'DM',
             'css': {
-                'left': 30,
-                'top': 65
+                'left': 20,
+                'top': 120
             },
             'bus': ['mem','cod','ac','ope']
         },{
             'name': 'ees',
             'showName': 'E E/S',
             'css': {
-                'left': 370,
+                'left': 360,
                 'top': 10
             },
             'bus': ['dev']
@@ -166,8 +166,8 @@ addProcessor(
             'name': 'des',
             'showName': 'D E/S',
             'css': {
-                'left': 370,
-                'top': 65
+                'left': 360,
+                'top': 80
             },
             'bus': ['dev','ac']
         }],
@@ -269,7 +269,7 @@ addProcessor(
                     var c = this.findRegister('ula.c');
                     var z = this.findRegister('ula.z');
                     var p = this.findRegister('ula.p');
-                    
+
                     a.select()
                     var aValue=a.read();
 
@@ -290,10 +290,10 @@ addProcessor(
                     }
                     if(cVal>0){
                         p.select(false);
-                        p.write(1);   
+                        p.write(1);
                     }else{
                         p.select(false);
-                        p.write(0);   
+                        p.write(0);
                     }
                 }
             },{
@@ -306,7 +306,7 @@ addProcessor(
                     var c = this.findRegister('ula.c');
                     var z = this.findRegister('ula.z');
                     var p = this.findRegister('ula.p');
-                    
+
                     a.select()
                     var aValue=a.read();
 
@@ -326,10 +326,10 @@ addProcessor(
                     }
                     if(cVal>0){
                         p.select(false);
-                        p.write(1);   
+                        p.write(1);
                     }else{
                         p.select(false);
-                        p.write(0);   
+                        p.write(0);
                     }
                     if(cVal<0){
                         cVal*=-1;
@@ -405,7 +405,7 @@ addProcessor(
                 valor('mem',2);
 
                 i++;
-                valor('em',i); 
+                valor('em',i);
                 valor('mem',operando);
             },
             'COP_AC_AUX':function(operando){
@@ -415,7 +415,7 @@ addProcessor(
                 valor('mem',3);
 
                 i++;
-                valor('em',i); 
+                valor('em',i);
                 valor('mem',operando);
             },
             'COP_MEM_AC':function(operando){
@@ -435,7 +435,7 @@ addProcessor(
                 valor('mem',5);
 
                 i++;
-                valor('em',i); 
+                valor('em',i);
                 valor('mem',operando);
             },
             'COP_VAL_AC':function(){
@@ -468,7 +468,7 @@ addProcessor(
                 valor('mem',0);
 
                 i++;
-                valor('em',i); 
+                valor('em',i);
                 valor('mem',0);
             },
             'SOM_AC_VAL_AC':function(){
@@ -514,7 +514,7 @@ addProcessor(
                 valor('mem',21);
 
                 i++;
-                valor('em',i); 
+                valor('em',i);
                 valor('mem',operando);
             },
             'VAI_SE_P_1':function(operando){
