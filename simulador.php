@@ -6,7 +6,7 @@
         <link href="css/font-awesome.css" rel="stylesheet">
         <script src="system/svg.js"></script>
         <script src="system/Init.js"></script>
-        <script src="processor/sergium/cfg.js"></script>
+        <script src="processor/<?php echo $_GET['simulador'] ?>/cfg.js"></script>
         <header class="header">
             <?php include 'includes/menu.php' ?>
         </header>
@@ -48,7 +48,7 @@
                         <h3>PERIF&Eacute;RICOS</h3>
                         <div id="perifericos-content" class="box_scrollbar ">
                             <div id="perifericos" class="content">
-                                <ul devicearea="devicearea" class="devices"> 
+                                <ul devicearea="devicearea" class="devices">
                                 </ul>
                             </div>
                         </div>
