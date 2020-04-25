@@ -2,174 +2,172 @@
 * @autor Anderson Rocha
 **/
 
-addProcessor(
-  {
-    description:{
-      name: "SERGIUM",
-      descricao: "Computador Didatico",
-      arquitetura: "simplificada",
+addProcessor({
+  description:{
+    name: "SERGIUM",
+    descricao: "Computador Didatico",
+    arquitetura: "simplificada",
+  },
+  default:{
+    //Pointers of Memory
+    memoryPointer: 'em',
+    memorydata: 'dm',
+    //Pointers of I/O
+    ioPointer: 'ees',
+    ioData: 'des',
+    //pointer
+    programPointer: 'cod'
+  },
+  memory: {
+    size: 255,
+  },
+  functionalUnities: [{
+    name: 'ula',
+    showName: 'ULA',
+    css: {
+      'background-image': 'url("images/ula.png")',
+      'width': 200,
+      'height': 165,
+      'left': 140,
+      'top': 290
     },
-    default:{
-      //Pointers of Memory
-      memoryPointer:'em',
-      memorydata:'dm',
-      //Pointers of I/O
-      ioPointer:'ees',
-      ioData:'des',
-      //pointer
-      programPointer:'cod'
-    },
-    memory: {
-      'size': 255,
-    },
-    functionalUnities: [{
-      'name': 'ula',
-      'showName': 'ULA',
-      'css': {
-        'background-image': 'url("images/ula.png")',
-        'width': 200,
-        'height': 165,
-        'left': 140,
-        'top': 290
+    registers: [{
+      name: 'a',
+      showName: 'A',
+      css: {
+        'width': 40,
+        'height': 40,
+        'top': 20,
+        'left': 20
       },
-      'registers': [{
-        'name': 'a',
-        'showName': 'A',
-        'css': {
-          'width': 40,
-          'height': 40,
-          'top': 20,
-          'left': 20
-        },
-        'bus': []
-      }, {
-        'name': 'b',
-        'showName': 'B',
-        'css': {
-          'width': 40,
-          'height': 40,
-          'top': 20,
-          'left': 140
-        },
-        'bus': []
-      }, {
-        'name': 'c',
-        'showName': 'C',
-        'css': {
-          'width': 40,
-          'height': 40,
-          'top': 110,
-          'left': 80
-        },
-        'bus': ['ac']
-      }, {
-        'name': 'z',
-        'showName': 'Z',
-        'css': {
-          'width': 30,
-          'height': 30,
-          'top': 80,
-          'left': 160
-        },
-        'size':1,
-        'bus': []
-      }, {
-        'name': 'p',
-        'showName': 'P',
-        'css': {
-          'width': 30,
-          'height': 30,
-          'top': 120,
-          'left': 160
-        },
-        'size':1,
-        'bus': []
-      }]
-    }
-  ],
+      bus: []
+    }, {
+      name: 'b',
+      showName: 'B',
+      css: {
+        'width': 40,
+        'height': 40,
+        'top': 20,
+        'left': 140
+      },
+      bus: []
+    }, {
+      name: 'c',
+      showName: 'C',
+      css: {
+        'width': 40,
+        'height': 40,
+        'top': 110,
+        'left': 80
+      },
+      bus: ['ac']
+    }, {
+      name: 'z',
+      showName: 'Z',
+      css: {
+        'width': 30,
+        'height': 30,
+        'top': 80,
+        'left': 160
+      },
+      'size':1,
+      bus: []
+    }, {
+      name: 'p',
+      showName: 'P',
+      css: {
+        'width': 30,
+        'height': 30,
+        'top': 120,
+        'left': 160
+      },
+      'size':1,
+      bus: []
+    }]
+  }],
   auxRegisters: [{
-    'name': 'aux',
-    'showName': 'AUX',
+    name: 'aux',
+    showName: 'AUX',
     'size': 4,
     'pointer': 'eaux',
-    'css': {
+    css: {
       'left': 360,
       'top': 270
     },
-    'bus': ['ula.b','ac']
+    bus: ['ula.b','ac']
   }],
   registers: [{
-    'name': 'epi',
-    'showName': 'EPI',
-    'css': {
+    name: 'epi',
+    showName: 'EPI',
+    css: {
       'left': 150,
       'top': 10
     },
-    'bus': ['em']
+    bus: ['em']
   }, {
-    'name': 'cod',
-    'showName': 'COD',
-    'css': {
+    name: 'cod',
+    showName: 'COD',
+    css: {
       'left': 55,
       'top': 60
     },
-    'bus':[]
+    bus:[]
   },{
-    'name': 'ope',
-    'showName': 'OPE',
-    'css': {
+    name: 'ope',
+    showName: 'OPE',
+    css: {
       'left': 220,
       'top': 120
     },
-    'bus': ['dm','em','ula.b','eaux','ac','ees','epi']
+    bus: ['dm','em','ula.b','eaux','ac','ees','epi']
   },{
-    'name': 'ac',
-    'showName': 'AC',
-    'css': {
+    name: 'ac',
+    showName: 'AC',
+    css: {
       'left': 40,
       'top': 270
     },
-    'bus': ['dm','aux','ula.a','des']
+    bus: ['dm','aux','ula.a','des']
   },{
-    'name': 'eaux',
-    'showName': 'EAUX',
-    'css': {
+    name: 'eaux',
+    showName: 'EAUX',
+    css: {
       'left': 360,
       'top': 200
     },
-    'bus': ['aux']
+    bus: ['aux']
   },{
-    'name': 'em',
-    'showName': 'EM',
-    'css': {
+    name: 'em',
+    showName: 'EM',
+    css: {
       'left': 20,
       'top': 10
     },
-    'bus': ['mem']
+    bus: ['mem']
   },{
-    'name': 'dm',
-    'showName': 'DM',
-    'css': {
+    name: 'dm',
+    showName: 'DM',
+    css: {
       'left': 20,
       'top': 120
     },
-    'bus': ['mem','cod','ac','ope']
+    bus: ['mem','cod','ac','ope']
   },{
-    'name': 'ees',
-    'showName': 'E E/S',
-    'css': {
+    name: 'ees',
+    showName: 'E E/S',
+    css: {
       'left': 360,
       'top': 10
     },
-    'bus': ['dev']
+    bus: ['dev']
   },{
-    'name': 'des',
-    'showName': 'D E/S',
-    'css': {
+    name: 'des',
+    showName: 'D E/S',
+    css: {
       'left': 360,
       'top': 80
     },
-    'bus': ['dev','ac']
+    bus: ['dev','ac']
   }],
   functions: {
     init: [
@@ -260,23 +258,23 @@ addProcessor(
   },
   logic: [
     {
-      name:"SUM",
+      name: "SUM",
       fn: function() {
         console.log('ULA-SUM')
 
-        var a = this.findRegister('ula.a');
-        var b = this.findRegister('ula.b');
-        var c = this.findRegister('ula.c');
-        var z = this.findRegister('ula.z');
-        var p = this.findRegister('ula.p');
+        let a = this.findRegister('ula.a');
+        let b = this.findRegister('ula.b');
+        let c = this.findRegister('ula.c');
+        let z = this.findRegister('ula.z');
+        let p = this.findRegister('ula.p');
 
         a.select()
-        var aValue=a.read();
+        let aValue=a.read();
 
         b.select(false)
-        var bValue=b.read();
+        let bValue=b.read();
 
-        var cVal=aValue+bValue;
+        let cVal=aValue+bValue;
 
         c.select(false);
         c.write(cVal);
@@ -301,19 +299,19 @@ addProcessor(
       fn: function() {
         console.log('ULA-SUB')
 
-        var a = this.findRegister('ula.a');
-        var b = this.findRegister('ula.b');
-        var c = this.findRegister('ula.c');
-        var z = this.findRegister('ula.z');
-        var p = this.findRegister('ula.p');
+        let a = this.findRegister('ula.a');
+        let b = this.findRegister('ula.b');
+        let c = this.findRegister('ula.c');
+        let z = this.findRegister('ula.z');
+        let p = this.findRegister('ula.p');
 
         a.select()
-        var aValue=a.read();
+        let aValue=a.read();
 
         b.select(false)
-        var bValue=b.read();
+        let bValue=b.read();
 
-        var cVal=aValue-bValue;
+        let cVal=aValue-bValue;
 
         c.select(false);
 
@@ -342,12 +340,12 @@ addProcessor(
       fn: function() {
         console.log('ULA-GOZ')
 
-        var z = this.findRegister('ula.z');
-        var ope = this.findRegister('ope');
-        var epi = this.findRegister('epi');
+        let z = this.findRegister('ula.z');
+        let ope = this.findRegister('ope');
+        let epi = this.findRegister('epi');
 
         z.select();
-        var zVal=z.read();
+        let zVal=z.read();
 
         if (zVal === 1) {
           ope.select(false)
@@ -361,12 +359,12 @@ addProcessor(
       fn: function() {
         console.log('ULA-GOP')
 
-        var p = this.findRegister('ula.p');
-        var ope = this.findRegister('ope');
-        var epi = this.findRegister('epi');
+        let p = this.findRegister('ula.p');
+        let ope = this.findRegister('ope');
+        let epi = this.findRegister('epi');
 
         p.select();
-        var pVal=p.read();
+        let pVal=p.read();
 
         if (pVal === 1) {
           ope.select(false)
@@ -378,9 +376,9 @@ addProcessor(
     }
   ],
   montador:{
-    'ENT_PORTA_AC':function(operando){
+    'ENT_PORTA_AC': function(operando){
       //parse to 0
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',0);
 
@@ -388,9 +386,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'SAI_AC_PORTA':function(operando){
+    'SAI_AC_PORTA': function(operando){
       //parse to 1
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',1);
 
@@ -398,9 +396,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'COP_AUX_AC':function(operando){
+    'COP_AUX_AC': function(operando){
       //parse to 2
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',2);
 
@@ -408,9 +406,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'COP_AC_AUX':function(operando){
+    'COP_AC_AUX': function(operando){
       //parse to 3
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',3);
 
@@ -418,9 +416,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'COP_MEM_AC':function(operando){
+    'COP_MEM_AC': function(operando){
       //parse to 4
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',4);
 
@@ -428,9 +426,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'COP_AC_MEM':function(operando){
+    'COP_AC_MEM': function(operando){
       //parse to 5
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',5);
 
@@ -438,9 +436,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'COP_VAL_AC':function(){
+    'COP_VAL_AC': function(){
       //parse to 6
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',6);
 
@@ -448,12 +446,12 @@ addProcessor(
       valor('em',i);
       valor('mem',0);
     },
-    'NULL7':function(){},
-    'NULL8':function(){},
-    'NULL9':function(){},
-    'SOM_AC_AUX_AC':function(){
+    'NULL7': function(){},
+    'NULL8': function(){},
+    'NULL9': function(){},
+    'SOM_AC_AUX_AC': function(){
       //parse to 10
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',10);
 
@@ -461,9 +459,9 @@ addProcessor(
       valor('em',i);
       valor('mem',0);
     },
-    'SUB_AC_AUX_AC':function(){
+    'SUB_AC_AUX_AC': function(){
       //parse to 11
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',0);
 
@@ -471,9 +469,9 @@ addProcessor(
       valor('em',i);
       valor('mem',0);
     },
-    'SOM_AC_VAL_AC':function(){
+    'SOM_AC_VAL_AC': function(){
       //parse to 12
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',12);
 
@@ -481,9 +479,9 @@ addProcessor(
       valor('em',i);
       valor('mem',0);
     },
-    'SUB_AC_VAL_AC':function(){
+    'SUB_AC_VAL_AC': function(){
       //parse to 13
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',13);
 
@@ -491,15 +489,15 @@ addProcessor(
       valor('em',i);
       valor('mem',0);
     },
-    'NULL14':function(){},
-    'NULL15':function(){},
-    'NULL16':function(){},
-    'NULL17':function(){},
-    'NULL18':function(){},
-    'NULL19':function(){},
-    'VAI':function(operando){
+    'NULL14': function(){},
+    'NULL15': function(){},
+    'NULL16': function(){},
+    'NULL17': function(){},
+    'NULL18': function(){},
+    'NULL19': function(){},
+    'VAI': function(operando){
       //parse to 20
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',20);
 
@@ -507,9 +505,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'VAI_SE_Z_1':function(operando){
+    'VAI_SE_Z_1': function(operando){
       //parse to 21
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',21);
 
@@ -517,9 +515,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'VAI_SE_P_1':function(operando){
+    'VAI_SE_P_1': function(operando){
       //parse to 22
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i++);
       valor('mem',22);
 
@@ -527,9 +525,9 @@ addProcessor(
       valor('em',i);
       valor('mem',operando);
     },
-    'PARA':function(){
+    'PARA': function(){
       //parse to 23
-      var i=valor('em');
+      let i = valor('em');
       valor('em',i);
       valor('mem',23);
 
@@ -538,5 +536,4 @@ addProcessor(
       valor('mem',0);
     }
   }
-}
-);
+});

@@ -83,14 +83,14 @@ window.Bus = function(id,x1,y1,x2,y2){
 }
 
 Bus.prototype.enable = function(){
-  console.log('BUSON:' + this.id)
+  // console.log('BUSON:' + this.id)
   this.originLine.enable();
   this.middleLine.enable();
   this.destinationLine.enable();
 }
 
 Bus.prototype.disable = function(){
-  console.log('BUSOFF:' + this.id)
+  // console.log('BUSOFF:' + this.id)
   this.originLine.disable();
   this.middleLine.disable();
   this.destinationLine.disable();
