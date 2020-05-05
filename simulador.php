@@ -7,6 +7,10 @@
         <script src="system/svg.js"></script>
         <script src="system/Init.js"></script>
         <script src="processor/<?php echo $_GET['simulador'] ?>/cfg.js"></script>
+        <?php if(isset($_GET['edit_mode'])){ ?>
+          <script src="system/edit_mode.js"></script>
+        <?php } ?>
+
         <header class="header">
             <?php include 'includes/menu.php' ?>
         </header>
@@ -40,6 +44,11 @@
                             <!-- <button title="" type="button" onclick="editor_assembly();" title="editor"><\></button> -->
                             <button type="button" id="configPanel" title="Painel de configuração"><i class="fa fa-cog"></i></button>
                             <!-- <button type="button" id="description" title="Descritivo"><i class="fa fa-file-text-o"></i></button> -->
+                            <?php if(isset($_GET['edit_mode'])){ ?>
+                              <button type="button" title="Edit" onClick="design_mode()"><i class="fa fa-edit"></i></button>
+                              <button type="button" title="Save"onClick="design_mode_end()"><i class="fa fa-save"></i></button>
+                            <?php } ?>
+
                         </div>
                     </div>
                 </div>
