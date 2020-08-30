@@ -25,7 +25,7 @@ addProcessor({
     name: 'ula',
     showName: 'ULA',
     css: {
-      'background-image': 'url("images/ula.png")',
+      'background-image': 'url("/images/ula.png")',
       'width': 200,
       'height': 165,
       'left': 140,

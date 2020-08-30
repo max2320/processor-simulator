@@ -28,7 +28,7 @@ var processador = {
             'nome': 'ula',
             'nome_exibicao': 'ULA',
             'style': {
-                'background-image': 'url("images/ula.png")',
+                'background-image': 'url("/images/ula.png")',
                 'width': '200px',
                 'height': '165px',
                 'top': '220px',
