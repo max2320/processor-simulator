@@ -11,16 +11,16 @@ function addDevice(config){
 }
 
 var scripts=[
-	"system/MotherBoard.js",
-	"system/Clock.js",
-	"system/Storage.js",
-	"system/Memory.js",
-	"system/Register.js",
-	"system/FunctionalUnit.js",
-	"system/AuxRegister.js",
-	"system/Processor.js",
-	"system/Devices.js",
-	"system/Bus.js",
+	"/system/MotherBoard.js",
+	"/system/Clock.js",
+	"/system/Storage.js",
+	"/system/Memory.js",
+	"/system/Register.js",
+	"/system/FunctionalUnit.js",
+	"/system/AuxRegister.js",
+	"/system/Processor.js",
+	"/system/Devices.js",
+	"/system/Bus.js",
 ];
 var motherBoard;
 
@@ -46,20 +46,20 @@ $(function(){
 
 addDevice({
 	"pointer":"Teclado Numérico",
-	"showName":"Teclado Numérico",  
+	"showName":"Teclado Numérico",
 	"dialogSize":"sm",
 	ui:function (store,selector){
 		store.write("");
 		function addNumber(n){
 			var str = store.read()+""+n;
-			
+
 			if(parseInt(str)>255){
 				str="255";
 			}
 
 			store.write(parseInt(str));
 			dataField.html(str);
-		}  
+		}
 		function removeNumber(){
 			var str = store.read()+"";
 			str = str.split("");
@@ -94,7 +94,7 @@ addDevice({
 			keypad.append(btn);
 			if((i + 1) % 4 == 0 && i != 0){
 				keypad.append('<br clear="both">');
-			} 
+			}
 		}
 
 		container.append(keypad);
@@ -107,7 +107,7 @@ addDevice({
 });
 addDevice({
 	"pointer":"Display",
-	"showName":"Display", 
+	"showName":"Display",
 	"dialogSize":"lg",
 	ui:function (store,selector){
 		var container=$('<div>');
@@ -127,7 +127,7 @@ addDevice({
 });
 addDevice({
 	"pointer":"Impressora",
-	"showName":"Impressora", 
+	"showName":"Impressora",
 	"dialogSize":"lg",
 	ui:function (store,selector){
 		var container=$('<div>');
